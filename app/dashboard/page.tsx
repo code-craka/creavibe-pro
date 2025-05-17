@@ -2,187 +2,150 @@
 
 import { useEffect, useState } from "react"
 import { useAuth } from "@/contexts/auth-context"
-import { DashboardNav } from "@/components/dashboard-nav"
-import { Separator } from "@/components/ui/separator"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { supabase } from "@/lib/supabase"
-import { Loader2 } from "lucide-react"
+import { formatDistanceToNow } from "date-fns"
+import { Sparkles, Clock, FileText } from "lucide-react"
+import { DashboardMetricCard } from "@/components/dashboard/metric-card"
+import { DashboardHeader } from "@/components/dashboard/header"
+import { QuickActions } from "@/components/dashboard/quick-actions"
+import { RecentProjects } from "@/components/dashboard/recent-projects"
 
-interface Project {
-  id: string
-  title: string
-  description: string | null
-  created_at: string
+interface UserProfile {
+  username: string | null
+  full_name: string | null
+  avatar_url: string | null
+  last_login: string | null
+}
+
+interface Metrics {
+  totalProjects: number
+  aiGenerations: number
+  lastLogin: string | null
 }
 
 export default function DashboardPage() {
-  const { user } = useAuth()
-  const [projects, setProjects] = useState<Project[]>([])
+  const { user, signOut } = useAuth()
+  const [profile, setProfile] = useState<UserProfile | null>(null)
+  const [metrics, setMetrics] = useState<Metrics>({
+    totalProjects: 0,
+    aiGenerations: 0,
+    lastLogin: null,
+  })
   const [loading, setLoading] = useState(true)
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  // Update time every minute
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 60000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   useEffect(() => {
-    async function fetchProjects() {
+    async function fetchUserData() {
       if (!user) return
 
       try {
         setLoading(true)
-        const { data, error } = await supabase
-          .from("projects")
+
+        // Fetch user profile
+        const { data: profileData, error: profileError } = await supabase
+          .from("profiles")
           .select("*")
+          .eq("id", user.id)
+          .single()
+
+        if (profileError) throw profileError
+
+        // Fetch projects count
+        const { count: projectsCount, error: projectsError } = await supabase
+          .from("projects")
+          .select("*", { count: "exact", head: true })
           .eq("user_id", user.id)
-          .order("created_at", { ascending: false })
 
-        if (error) {
-          throw error
-        }
+        if (projectsError) throw projectsError
 
-        setProjects(data || [])
+        // For demo purposes, we'll simulate AI generations count
+        // In a real app, you would fetch this from your database
+        const aiGenerations = Math.floor(Math.random() * 50) + 5
+
+        setProfile({
+          username: profileData?.username,
+          full_name: profileData?.full_name,
+          avatar_url: profileData?.avatar_url,
+          last_login: user.last_sign_in_at,
+        })
+
+        setMetrics({
+          totalProjects: projectsCount || 0,
+          aiGenerations,
+          lastLogin: user.last_sign_in_at,
+        })
       } catch (error) {
-        console.error("Error fetching projects:", error)
+        console.error("Error fetching user data:", error)
       } finally {
         setLoading(false)
       }
     }
 
-    fetchProjects()
-
-    // Set up real-time subscription
-    const subscription = supabase
-      .channel("projects_changes")
-      .on(
-        "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "projects",
-          filter: `user_id=eq.${user?.id}`,
-        },
-        (payload) => {
-          console.log("Change received!", payload)
-          // Refresh projects when changes occur
-          fetchProjects()
-        },
-      )
-      .subscribe()
-
-    return () => {
-      subscription.unsubscribe()
-    }
+    fetchUserData()
   }, [user])
 
+  const displayName = profile?.full_name || profile?.username || user?.email?.split("@")[0] || "User"
+
   return (
-    <div className="space-y-6 p-10 pb-16">
-      <div className="space-y-0.5">
-        <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
-        <p className="text-muted-foreground">
-          Welcome back, {user?.email}! Here's an overview of your projects and activities.
-        </p>
-      </div>
-      <Separator className="my-6" />
-      <div className="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
-        <aside className="lg:w-1/5">
-          <DashboardNav />
-        </aside>
-        <div className="flex-1">
+    <div className="min-h-screen bg-background">
+      {/* Navigation Bar */}
+      <DashboardHeader
+        displayName={displayName}
+        avatarUrl={profile?.avatar_url}
+        currentTime={currentTime}
+        onSignOut={signOut}
+      />
+
+      {/* Main Content */}
+      <main className="container mx-auto px-4 py-6">
+        <div className="flex flex-col gap-6">
+          {/* Welcome Section */}
+          <div className="flex flex-col gap-2">
+            <h1 className="text-3xl font-bold tracking-tight">Welcome back, {displayName}!</h1>
+            <p className="text-muted-foreground">Here's an overview of your creative workspace and recent activity.</p>
+          </div>
+
+          {/* Metrics Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Total Projects</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                </svg>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{projects.length}</div>
-                <p className="text-xs text-muted-foreground">+2 since last month</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Recent Activity</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                </svg>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">+12</div>
-                <p className="text-xs text-muted-foreground">+3% from last week</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">Storage Used</CardTitle>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  className="h-4 w-4 text-muted-foreground"
-                >
-                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
-                </svg>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">25%</div>
-                <p className="text-xs text-muted-foreground">+7% from last month</p>
-              </CardContent>
-            </Card>
+            <DashboardMetricCard
+              title="Total Projects"
+              value={metrics.totalProjects.toString()}
+              description="Active projects in your workspace"
+              icon={<FileText className="h-5 w-5 text-primary" />}
+              loading={loading}
+            />
+            <DashboardMetricCard
+              title="AI Generations"
+              value={metrics.aiGenerations.toString()}
+              description="Content pieces created with AI"
+              icon={<Sparkles className="h-5 w-5 text-primary" />}
+              loading={loading}
+            />
+            <DashboardMetricCard
+              title="Last Login"
+              value={metrics.lastLogin ? formatDistanceToNow(new Date(metrics.lastLogin), { addSuffix: true }) : "N/A"}
+              description="Your previous session"
+              icon={<Clock className="h-5 w-5 text-primary" />}
+              loading={loading}
+            />
           </div>
-          <div className="mt-8">
-            <h3 className="text-lg font-medium mb-4">Recent Projects</h3>
-            {loading ? (
-              <div className="flex justify-center items-center h-40">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              </div>
-            ) : projects.length > 0 ? (
-              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {projects.map((project) => (
-                  <Card key={project.id}>
-                    <CardHeader>
-                      <CardTitle>{project.title}</CardTitle>
-                      <CardDescription>{new Date(project.created_at).toLocaleDateString()}</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">
-                        {project.description || "No description provided"}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            ) : (
-              <Card>
-                <CardContent className="flex flex-col items-center justify-center h-40">
-                  <p className="text-muted-foreground mb-2">No projects found</p>
-                  <p className="text-sm text-muted-foreground">Create your first project to get started</p>
-                </CardContent>
-              </Card>
-            )}
-          </div>
+
+          {/* Quick Actions */}
+          <QuickActions />
+
+          {/* Recent Projects */}
+          <RecentProjects userId={user?.id} />
         </div>
-      </div>
+      </main>
     </div>
   )
 }

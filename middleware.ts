@@ -16,7 +16,9 @@ export async function middleware(req: NextRequest) {
   const isProtectedRoute =
     req.nextUrl.pathname.startsWith("/dashboard") ||
     req.nextUrl.pathname.startsWith("/profile") ||
-    req.nextUrl.pathname.startsWith("/projects")
+    req.nextUrl.pathname.startsWith("/projects") ||
+    req.nextUrl.pathname.startsWith("/ai-tools") ||
+    req.nextUrl.pathname.startsWith("/settings")
 
   if (!session && isProtectedRoute) {
     const redirectUrl = new URL("/login", req.url)
@@ -38,5 +40,14 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/profile/:path*", "/projects/:path*", "/login", "/signup", "/forgot-password"],
+  matcher: [
+    "/dashboard/:path*",
+    "/profile/:path*",
+    "/projects/:path*",
+    "/ai-tools/:path*",
+    "/settings/:path*",
+    "/login",
+    "/signup",
+    "/forgot-password",
+  ],
 }

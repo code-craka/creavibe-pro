@@ -20,6 +20,9 @@ CREATE TABLE projects (
   user_id UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL
 );
 
+-- Add status field to projects table if it doesn't exist
+ALTER TABLE projects ADD COLUMN IF NOT EXISTS status TEXT DEFAULT 'draft';
+
 -- Set up Row Level Security (RLS)
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
