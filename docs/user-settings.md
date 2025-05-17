@@ -1,8 +1,22 @@
 # Advanced User Settings Page
 
-The Advanced User Settings page provides a comprehensive interface for users to manage their account settings, customize the application appearance, and connect with external services within the Creavibe.pro application.
+The Advanced User Settings page provides a comprehensive interface for users to manage their account settings, customize the application appearance, connect with external services, export data, and manage API tokens within the Creavibe.pro application.
 
 ## Features
+
+### Data Export
+- **Multiple Export Formats**: Export data in JSON, CSV, and Excel (XLSX) formats
+- **Selective Data Export**: Choose specific data types to export
+- **Date Range Filtering**: Filter exported data by date range
+- **Export Progress Tracking**: Visual progress indicator during export
+- **Recent Exports History**: View and download previous exports
+
+### API Token Management
+- **Token Generation**: Create API tokens with specific permissions
+- **Token Security**: Secure token display and copy functionality
+- **Permission Management**: Granular control over token permissions
+- **Token Revocation**: Easily revoke tokens when no longer needed
+- **Usage Tracking**: View when tokens were created and last used
 
 ### Tabbed Interface
 - **Profile Settings**: Manage personal information and profile picture
@@ -10,33 +24,6 @@ The Advanced User Settings page provides a comprehensive interface for users to 
 - **Connected Accounts**: Link and manage external service integrations
 - **Notification Settings**: Control email, push, and in-app notifications
 - **Security Settings**: Manage password, two-factor authentication, and security preferences
-
-### Profile Management
-- **Profile Picture Upload**: Upload, preview, and crop profile images
-- **Personal Information**: Edit name, email, and bio
-- **Account Deletion**: Secure process for account deletion with confirmation
-
-### Theme Customization
-- **Color Palette Selection**: Choose from predefined color schemes or create custom palettes
-- **Dark/Light Mode Toggle**: Switch between light, dark, or system theme
-- **Typography Settings**: Customize font family and size with live preview
-- **Accessibility Options**: Settings for reduced motion and high contrast
-
-### Connected Accounts
-- **External Service Integration**: Connect with Google, Facebook, Twitter, GitHub, and LinkedIn
-- **Authentication Flow**: Secure OAuth connection process
-- **Account Management**: View, connect, and disconnect linked accounts
-
-### Notification Preferences
-- **Email Notifications**: Control email frequency and content types
-- **Push Notifications**: Manage mobile and desktop push alerts
-- **In-App Notifications**: Configure notifications within the application
-- **Digest Settings**: Set frequency for notification summaries
-
-### Security Features
-- **Password Management**: Update password with strength requirements
-- **Two-Factor Authentication**: Enable/disable 2FA with recovery codes
-- **Security Settings**: Configure session timeout and login notifications
 
 ## Usage
 
@@ -53,6 +40,12 @@ export default function SettingsPage() {
 ### UserSettingsPage
 The main component that renders the tabbed settings interface.
 
+### DataExportSettings
+Manages data export functionality with format selection, data type filtering, and export history.
+
+### ApiTokenSettings
+Handles API token generation, permission management, and token revocation.
+
 ### ProfileSettings
 Manages user profile information and profile picture upload.
 
@@ -68,18 +61,35 @@ Controls notification preferences across different channels.
 ### SecuritySettings
 Handles password management, two-factor authentication, and security options.
 
-### DeleteAccountDialog
-A modal dialog for account deletion confirmation.
+## Data Export
+
+The data export functionality allows users to:
+
+1. Select specific data types to export (Projects, Templates, Content, etc.)
+2. Choose the export format (JSON, CSV, Excel)
+3. Filter data by date range
+4. Track export progress
+5. Download completed exports
+
+## API Token Management
+
+The API token system provides:
+
+1. Secure token generation with descriptive names
+2. Granular permission control for different API endpoints
+3. Token usage tracking (creation date, last used)
+4. Secure token display and copy functionality
+5. Easy token revocation
 
 ## Customization
 
 You can customize the settings page by:
 
 1. Adding or removing tabs for different setting categories
-2. Extending the theme options with additional color palettes
-3. Integrating with your authentication and user management services
-4. Adding more connected account providers
-5. Customizing notification categories based on your application's features
+2. Extending the data export options with additional formats
+3. Adding more API token permissions based on your API endpoints
+4. Customizing the export data types based on your application's data model
+5. Integrating with your authentication and user management services
 
 ## Accessibility
 
@@ -100,4 +110,4 @@ The settings page is fully responsive:
 - Touch-friendly interactive elements
 \`\`\`
 
-Let's create the necessary UI components:
+Let's create an example usage page:

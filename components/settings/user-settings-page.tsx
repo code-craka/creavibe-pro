@@ -8,6 +8,9 @@ import { ConnectedAccountsSettings } from "@/components/settings/connected-accou
 import { SecuritySettings } from "@/components/settings/security-settings"
 import { NotificationSettings } from "@/components/settings/notification-settings"
 import { UserIcon, PaletteIcon, LinkIcon, BellIcon, ShieldIcon } from "lucide-react"
+import { DataExportSettings } from "@/components/settings/data-export-settings"
+import { ApiTokenSettings } from "@/components/settings/api-token-settings"
+import { DatabaseIcon, KeyIcon } from "lucide-react"
 
 export function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("profile")
@@ -20,7 +23,7 @@ export function UserSettingsPage() {
       </div>
 
       <Tabs defaultValue="profile" value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-        <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 h-auto p-1">
+        <TabsList className="grid grid-cols-2 md:grid-cols-7 gap-2 h-auto p-1">
           <TabsTrigger
             value="profile"
             className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -56,6 +59,20 @@ export function UserSettingsPage() {
             <ShieldIcon className="h-4 w-4" />
             <span className="hidden md:inline">Security</span>
           </TabsTrigger>
+          <TabsTrigger
+            value="data-export"
+            className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <DatabaseIcon className="h-4 w-4" />
+            <span className="hidden md:inline">Data Export</span>
+          </TabsTrigger>
+          <TabsTrigger
+            value="api-tokens"
+            className="flex items-center gap-2 py-3 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <KeyIcon className="h-4 w-4" />
+            <span className="hidden md:inline">API Tokens</span>
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile" className="space-y-6">
@@ -76,6 +93,14 @@ export function UserSettingsPage() {
 
         <TabsContent value="security" className="space-y-6">
           <SecuritySettings />
+        </TabsContent>
+
+        <TabsContent value="data-export" className="space-y-6">
+          <DataExportSettings />
+        </TabsContent>
+
+        <TabsContent value="api-tokens" className="space-y-6">
+          <ApiTokenSettings />
         </TabsContent>
       </Tabs>
     </div>
