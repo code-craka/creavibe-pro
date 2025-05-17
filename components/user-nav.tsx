@@ -20,12 +20,14 @@ interface UserNavProps {
     name?: string
     email?: string
     image?: string
+    role?: string
   }
   onSignOut: () => void
 }
 
 export function UserNav({ user, onSignOut }: UserNavProps) {
   const userInitial = user.name?.charAt(0) || "U"
+  const isAdmin = user.role === "admin"
 
   return (
     <DropdownMenu>
@@ -42,31 +44,40 @@ export function UserNav({ user, onSignOut }: UserNavProps) {
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">{user.name}</p>
             <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
+            {isAdmin && <p className="text-xs font-medium text-purple-500 mt-1">Admin</p>}
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/dashboard">
+            <Link href="/dashboard" className="cursor-pointer">
               <User className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/profile">
+            <Link href="/profile" className="cursor-pointer">
               <Settings className="mr-2 h-4 w-4" />
               <span>Profile</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/billing">
+            <Link href="/billing" className="cursor-pointer">
               <CreditCard className="mr-2 h-4 w-4" />
               <span>Billing</span>
             </Link>
           </DropdownMenuItem>
+          {isAdmin && (
+            <DropdownMenuItem asChild>
+              <Link href="/admin" className="cursor-pointer">
+                <Settings className="mr-2 h-4 w-4" />
+                <span>Admin Panel</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={onSignOut}>
+        <DropdownMenuItem onClick={onSignOut} className="cursor-pointer">
           <LogOut className="mr-2 h-4 w-4" />
           <span>Log out</span>
         </DropdownMenuItem>

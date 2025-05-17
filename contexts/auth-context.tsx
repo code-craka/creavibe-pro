@@ -1,198 +1,86 @@
 "use client"
 
-import type React from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
-import { createContext, useContext, useEffect, useState } from "react"
-import type { Session, User } from "@supabase/supabase-js"
-import { supabase } from "@/lib/supabase"
-import { useToast } from "@/hooks/use-toast"
+interface User {
+  id: string
+  name: string
+  email: string
+  image?: string
+  role: "user" | "admin"
+}
 
-type AuthContextType = {
+interface AuthContextType {
   user: User | null
-  session: Session | null
   isLoading: boolean
-  signUp: (email: string, password: string) => Promise<{ error: any }>
-  signIn: (email: string, password: string) => Promise<{ error: any }>
-  signInWithMagicLink: (email: string) => Promise<{ error: any }>
-  signOut: () => Promise<void>
-  resetPassword: (email: string) => Promise<{ error: any }>
-  updatePassword: (password: string) => Promise<{ error: any }>
+  signIn: (email: string, password: string) => Promise<void>
+  signOut: () => void
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
-  const [session, setSession] = useState<Session | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const { toast } = useToast()
 
+  // Simulate fetching user on mount
   useEffect(() => {
-    // Set up auth state listener
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      setIsLoading(false)
-    })
+    const checkAuth = async () => {
+      try {
+        // In a real app, you would fetch the user from your API
+        // For demo purposes, we'll check localStorage
+        const storedUser = localStorage.getItem("user")
 
-    // Initial session fetch
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-      setIsLoading(false)
-    })
-
-    return () => {
-      subscription.unsubscribe()
+        if (storedUser) {
+          setUser(JSON.parse(storedUser))
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error)
+      } finally {
+        setIsLoading(false)
+      }
     }
+
+    checkAuth()
   }, [])
 
-  const signUp = async (email: string, password: string) => {
-    try {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
-      })
-
-      if (!error) {
-        toast({
-          title: "Verification email sent",
-          description: "Please check your email to verify your account",
-        })
-      }
-
-      return { error }
-    } catch (error) {
-      console.error("Error signing up:", error)
-      return { error }
-    }
-  }
-
   const signIn = async (email: string, password: string) => {
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      })
+    setIsLoading(true)
 
-      if (!error) {
-        toast({
-          title: "Signed in successfully",
-          description: "Welcome back to Creavibe.pro!",
-        })
+    try {
+      // In a real app, you would call your API to authenticate
+      // For demo purposes, we'll simulate a successful login
+      const mockUser: User = {
+        id: "1",
+        name: "Demo User",
+        email: email,
+        role: email.includes("admin") ? "admin" : "user",
       }
 
-      return { error }
+      setUser(mockUser)
+      localStorage.setItem("user", JSON.stringify(mockUser))
     } catch (error) {
       console.error("Error signing in:", error)
-      return { error }
+      throw error
+    } finally {
+      setIsLoading(false)
     }
   }
 
-  const signInWithMagicLink = async (email: string) => {
-    try {
-      const { error } = await supabase.auth.signInWithOtp({
-        email,
-        options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
-        },
-      })
-
-      if (!error) {
-        toast({
-          title: "Magic link sent",
-          description: "Check your email for the login link",
-        })
-      }
-
-      return { error }
-    } catch (error) {
-      console.error("Error sending magic link:", error)
-      return { error }
-    }
+  const signOut = () => {
+    setUser(null)
+    localStorage.removeItem("user")
   }
 
-  const signOut = async () => {
-    try {
-      await supabase.auth.signOut()
-      toast({
-        title: "Signed out successfully",
-        description: "You have been logged out of your account",
-      })
-    } catch (error) {
-      console.error("Error signing out:", error)
-      toast({
-        title: "Error signing out",
-        description: "An error occurred while signing out",
-        variant: "destructive",
-      })
-    }
-  }
-
-  const resetPassword = async (email: string) => {
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`,
-      })
-
-      if (!error) {
-        toast({
-          title: "Password reset email sent",
-          description: "Check your email for the password reset link",
-        })
-      }
-
-      return { error }
-    } catch (error) {
-      console.error("Error resetting password:", error)
-      return { error }
-    }
-  }
-
-  const updatePassword = async (password: string) => {
-    try {
-      const { error } = await supabase.auth.updateUser({
-        password,
-      })
-
-      if (!error) {
-        toast({
-          title: "Password updated",
-          description: "Your password has been updated successfully",
-        })
-      }
-
-      return { error }
-    } catch (error) {
-      console.error("Error updating password:", error)
-      return { error }
-    }
-  }
-
-  const value = {
-    user,
-    session,
-    isLoading,
-    signUp,
-    signIn,
-    signInWithMagicLink,
-    signOut,
-    resetPassword,
-    updatePassword,
-  }
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ user, isLoading, signIn, signOut }}>{children}</AuthContext.Provider>
 }
 
-export const useAuth = () => {
+export function useAuth() {
   const context = useContext(AuthContext)
+
   if (context === undefined) {
     throw new Error("useAuth must be used within an AuthProvider")
   }
+
   return context
 }

@@ -63,7 +63,7 @@ export function Navbar({
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-l4PRz3KCaOBCFxoqvwTcHRjcPC4eHf.png"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-XIfiZJ59NEYx0A5RffblInOIVGVlsP.png"
               alt="Creavibe.pro"
               width={32}
               height={32}
@@ -115,7 +115,9 @@ export function Navbar({
                     </Button>
                   </Link>
                   <Link href="/signup">
-                    <Button size="sm">Get Started</Button>
+                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                      Get Started
+                    </Button>
                   </Link>
                 </>
               )}
@@ -134,7 +136,7 @@ export function Navbar({
               <div className="flex flex-col gap-6 py-6">
                 <Link href="/" className="flex items-center gap-2">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-l4PRz3KCaOBCFxoqvwTcHRjcPC4eHf.png"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-XIfiZJ59NEYx0A5RffblInOIVGVlsP.png"
                     alt="Creavibe.pro"
                     width={32}
                     height={32}
@@ -182,7 +184,7 @@ export function Navbar({
                       </Button>
                     </Link>
                     <Link href="/signup">
-                      <Button className="w-full">Get Started</Button>
+                      <Button className="w-full bg-purple-600 hover:bg-purple-700">Get Started</Button>
                     </Link>
                   </div>
                 )}

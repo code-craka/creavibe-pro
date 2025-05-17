@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function getCategoryColor(categoryId: string) {
+export function getCategoryColor(categoryId: string): string {
   switch (categoryId) {
     case "blog":
       return "text-blue-500"
@@ -20,7 +20,7 @@ export function getCategoryColor(categoryId: string) {
   }
 }
 
-export function getActionTypeColor(actionType: string) {
+export function getActionTypeColor(actionType: string): string {
   switch (actionType) {
     case "Login":
       return "text-green-500"
@@ -40,8 +40,6 @@ export function getActionTypeColor(actionType: string) {
       return "text-lime-500"
     case "Logout":
       return "text-gray-500"
-    case "Unpublish":
-      return "text-amber-500"
     default:
       return "text-gray-500"
   }
