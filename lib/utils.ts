@@ -46,7 +46,7 @@ export function getActionTypeColor(actionType: string): string {
   }
 }
 
-export function formatDate(dateString: string | undefined): string {
+export function formatDate(dateString: string): string {
   if (!dateString) return ""
 
   const date = new Date(dateString)

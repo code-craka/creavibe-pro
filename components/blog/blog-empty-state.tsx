@@ -1,32 +1,31 @@
-import { FileQuestion } from "lucide-react"
+import { FileSearch } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-export function BlogEmptyState({
-  search,
-  category,
-}: {
-  search: string
-  category: string
-}) {
+interface BlogEmptyStateProps {
+  search?: string
+  category?: string
+}
+
+export function BlogEmptyState({ search, category }: BlogEmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-12 text-center">
-      <div className="rounded-full bg-muted p-6 mb-4">
-        <FileQuestion className="h-10 w-10 text-muted-foreground" />
+      <div className="mb-4 rounded-full bg-muted p-3">
+        <FileSearch className="h-6 w-6" />
       </div>
-      <h3 className="text-xl font-semibold mb-2">No articles found</h3>
-      <p className="text-muted-foreground max-w-md mb-6">
+      <h2 className="mb-2 text-xl font-semibold">No articles found</h2>
+      <p className="mb-6 max-w-md text-muted-foreground">
         {search && category
           ? `We couldn't find any articles matching "${search}" in the "${category}" category.`
           : search
             ? `We couldn't find any articles matching "${search}".`
             : category
               ? `We couldn't find any articles in the "${category}" category.`
-              : "We don't have any articles published yet. Check back soon!"}
+              : "We couldn't find any articles. Check back soon for new content!"}
       </p>
-      <Link href="/blog">
-        <Button variant="outline">View All Articles</Button>
-      </Link>
+      <Button asChild>
+        <Link href="/blog">View All Articles</Link>
+      </Button>
     </div>
   )
 }

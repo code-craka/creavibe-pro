@@ -1,21 +1,18 @@
-export interface BlogAuthor {
+export interface Author {
   id: string
   name: string
   avatar: string
-  role: string
-  bio: string
 }
 
 export interface BlogPost {
-  slug: string
+  id: string
   title: string
+  slug: string
   excerpt: string
   content: string
   coverImage: string
   publishedAt: string
-  updatedAt: string
-  author: BlogAuthor
+  author: Author
   tags: string[]
   category: string
-  relevanceScore?: number
 }

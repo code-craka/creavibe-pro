@@ -19,7 +19,8 @@ export default function BlogPage({
 
   return (
     <div className="container max-w-7xl py-10">
-      <BlogHeader />
+      {/* Pass search params to BlogHeader as props instead of using useSearchParams directly */}
+      <BlogHeader initialSearch={search} initialCategory={category} />
       <Suspense fallback={<BlogSkeleton />}>
         <BlogGrid search={search} category={category} />
       </Suspense>
