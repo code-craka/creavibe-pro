@@ -1,68 +1,68 @@
-# Creavibe.pro Supabase Deployment Guide
+# Deploying the Documentation Site to Vercel
 
-This guide will walk you through setting up and deploying the Creavibe.pro platform with Supabase authentication and database.
+This guide will walk you through the process of deploying the Creavibe.pro documentation site to Vercel.
 
 ## Prerequisites
 
-- A Vercel account for deploying the Next.js application
-- A Supabase account for authentication and database services
-- Node.js and npm installed on your local machine
+Before you begin, make sure you have:
 
-## Step 1: Set Up Supabase Project
+1. A GitHub account
+2. A Vercel account (you can sign up at [vercel.com](https://vercel.com))
+3. The documentation site code in a GitHub repository
 
-1. Log in to your Supabase account and create a new project.
-2. Note your project URL and anon key from the API settings page.
-3. Run the SQL migration script in the SQL editor:
-   - Copy the contents of `lib/supabase-schema.sql` and execute it in the Supabase SQL editor.
+## Deployment Steps
 
-## Step 2: Configure Authentication Settings
+### 1. Push Your Code to GitHub
 
-1. In your Supabase dashboard, go to Authentication > Settings.
-2. Configure the Site URL to match your production URL (e.g., `https://creavibe.pro`).
-3. Add any additional redirect URLs for local development (e.g., `http://localhost:3000`).
-4. Enable the authentication providers you want to use (Email/Password, Magic Link, etc.).
-5. Customize email templates for authentication emails if desired.
+Make sure your documentation site code is pushed to a GitHub repository.
 
-## Step 3: Set Up Environment Variables
-
-Create a `.env.local` file in your project root with the following variables:
-
-\`\`\`
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+\`\`\`bash
+git add .
+git commit -m "Documentation site ready for deployment"
+git push origin main
 \`\`\`
 
-## Step 4: Deploy to Vercel
+### 2. Import Your Project to Vercel
 
-1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket).
-2. Log in to your Vercel account and create a new project.
-3. Import your Git repository.
-4. Configure the environment variables:
-   - Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` with your Supabase project details.
-5. Deploy the project.
+1. Log in to your Vercel account
+2. Click on "Add New..." and select "Project"
+3. Import your GitHub repository
+4. Vercel will automatically detect that it's a Next.js project
 
-## Step 5: Configure Production URLs
+### 3. Configure Project Settings
 
-1. After deployment, update your Supabase authentication settings with your production URL.
-2. Add your production domain to the list of allowed redirect URLs.
+1. **Project Name**: Enter a name for your project (e.g., "creavibe-docs")
+2. **Framework Preset**: Ensure "Next.js" is selected
+3. **Root Directory**: Leave as default if your project is in the root of the repository
+4. **Build Command**: Leave as default (`next build`)
+5. **Output Directory**: Leave as default (`.next`)
+6. **Environment Variables**: Add any necessary environment variables
 
-## Step 6: Testing
+### 4. Deploy
 
-1. Test the authentication flow by creating a new account.
-2. Verify that magic link authentication works correctly.
-3. Test profile updates and other user management features.
-4. Verify that real-time features are working as expected.
+Click "Deploy" and wait for the deployment to complete. Vercel will build and deploy your documentation site.
+
+### 5. Custom Domain (Optional)
+
+1. Go to the "Domains" tab in your project settings
+2. Add your custom domain (e.g., "docs.creavibe.pro")
+3. Follow the instructions to configure DNS settings
+
+## Continuous Deployment
+
+Vercel automatically sets up continuous deployment from your GitHub repository. Any changes pushed to the main branch will trigger a new deployment.
 
 ## Troubleshooting
 
-- If authentication callbacks aren't working, check that your redirect URLs are correctly configured in Supabase.
-- If you encounter CORS issues, ensure your Supabase project has the correct origins allowed.
-- For database access issues, verify that your Row Level Security (RLS) policies are correctly set up.
+If you encounter any issues during deployment:
 
-## Security Considerations
+1. Check the build logs for errors
+2. Ensure all dependencies are correctly specified in package.json
+3. Verify that your Next.js configuration is correct
+4. Check that your content files are in the correct location
 
-- Regularly audit your RLS policies to ensure data is properly protected.
-- Consider implementing rate limiting for authentication attempts.
-- Regularly update dependencies to patch security vulnerabilities.
-- Use environment variables for all sensitive information.
-- Consider implementing additional security measures like CAPTCHA for registration forms.
+## Additional Resources
+
+- [Vercel Documentation](https://vercel.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [MDX Documentation](https://mdxjs.com/docs/)

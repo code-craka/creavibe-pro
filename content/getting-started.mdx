@@ -1,0 +1,81 @@
+# Getting Started with Creavibe.pro
+
+Welcome to the Creavibe.pro developer documentation! This guide will help you get started with our API and SDK.
+
+## Overview
+
+Creavibe.pro is a modern SaaS platform for AI-powered content creation and real-time creative collaboration. Our API allows you to integrate Creavibe.pro's powerful features into your own applications.
+
+## Prerequisites
+
+Before you begin, you'll need:
+
+- A Creavibe.pro account
+- API credentials (API key or OAuth client ID and secret)
+- Basic knowledge of REST APIs
+
+## Installation
+
+### Using npm
+
+\`\`\`bash
+npm install @creavibe/sdk
+\`\`\`
+
+### Using yarn
+
+\`\`\`bash
+yarn add @creavibe/sdk
+\`\`\`
+
+### Using pnpm
+
+\`\`\`bash
+pnpm add @creavibe/sdk
+\`\`\`
+
+## Quick Start
+
+Here's a simple example of how to use the Creavibe.pro SDK:
+
+\`\`\`typescript
+import { Creavibe } from '@creavibe/sdk';
+
+// Initialize the client
+const creavibe = new Creavibe({
+  apiKey: 'your-api-key',
+});
+
+// Create a new project
+async function createProject() {
+  try {
+    const project = await creavibe.projects.create({
+      name: 'My First Project',
+      description: 'A project created via the API',
+    });
+    
+    console.log('Project created:', project);
+  } catch (error) {
+    console.error('Error creating project:', error);
+  }
+}
+
+createProject();
+\`\`\`
+
+## Next Steps
+
+- [Authentication](/docs/authentication) - Learn more about authentication options
+- [API Reference](/docs/api-reference) - Explore the full API reference
+- [Examples](/docs/examples) - See more code examples
+
+## Support
+
+If you need help, you can:
+
+- [Join our Discord community](https://discord.gg/creavibe)
+- [Contact our support team](mailto:support@creavibe.pro)
+- [Open an issue on GitHub](https://github.com/creavibe/sdk/issues)
+\`\`\`
+
+Let's create a sample markdown file for the authentication page:
