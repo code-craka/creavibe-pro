@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { format, isValid } from "date-fns"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -43,4 +44,13 @@ export function getActionTypeColor(actionType: string): string {
     default:
       return "text-gray-500"
   }
+}
+
+export function formatDate(dateString: string | undefined): string {
+  if (!dateString) return ""
+
+  const date = new Date(dateString)
+  if (!isValid(date)) return ""
+
+  return format(date, "MMM d, yyyy")
 }

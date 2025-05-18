@@ -1,196 +1,114 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { NotificationBell } from "@/components/notification-bell"
-import { UserNav } from "@/components/user-nav"
-import { useAuth } from "@/contexts/auth-context"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { UserNav } from "@/components/user-nav"
+import { NotificationBell } from "@/components/notification-bell"
+import { Menu } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { useState } from "react"
+import { useAuth } from "@/contexts/auth-context"
+import Image from "next/image"
 
-interface NavbarProps {
-  notifications?: any[]
-  onMarkAsRead?: (id: string) => void
-  onMarkAllAsRead?: () => void
-  onClearAll?: () => void
-}
-
-export function Navbar({
-  notifications = [],
-  onMarkAsRead = () => {},
-  onMarkAllAsRead = () => {},
-  onClearAll = () => {},
-}: NavbarProps) {
+export function Navbar() {
   const pathname = usePathname()
-  const { user, isLoading, signOut } = useAuth()
-  const [isScrolled, setIsScrolled] = useState(false)
-  const isAdmin = user?.role === "admin"
+  const [open, setOpen] = useState(false)
+  const { user } = useAuth()
 
-  // Navigation links
-  const navLinks = [
-    { href: "/dashboard", label: "Dashboard" },
-    { href: "/templates", label: "Templates" },
-    { href: "/projects", label: "Projects" },
-    { href: "/integrations", label: "Integrations" },
-    // Only show Admin link for admin users
-    ...(isAdmin ? [{ href: "/admin", label: "Admin" }] : []),
+  const routes = [
+    {
+      href: "/",
+      label: "Home",
+      active: pathname === "/",
+    },
+    {
+      href: "/features",
+      label: "Features",
+      active: pathname === "/features",
+    },
+    {
+      href: "/blog",
+      label: "Blog",
+      active: pathname.startsWith("/blog"),
+    },
+    {
+      href: "/roadmap",
+      label: "Roadmap",
+      active: pathname === "/roadmap",
+    },
+    {
+      href: "/pricing",
+      label: "Pricing",
+      active: pathname === "/pricing",
+    },
   ]
 
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-200",
-        isScrolled ? "bg-background/95 backdrop-blur-sm border-b shadow-sm" : "bg-background",
-      )}
-    >
-      <div className="container flex h-16 items-center justify-between">
-        {/* Logo */}
-        <div className="flex items-center gap-2">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-XIfiZJ59NEYx0A5RffblInOIVGVlsP.png"
-              alt="Creavibe.pro"
-              width={32}
-              height={32}
-              className="h-8 w-auto"
-            />
-            <span className="hidden font-bold text-xl sm:inline-block">Creavibe.pro</span>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild className="md:hidden">
+            <Button variant="ghost" size="icon" className="mr-2">
+              <Menu className="h-5 w-5" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[240px] sm:w-[300px]">
+            <nav className="flex flex-col gap-4 mt-8">
+              {routes.map((route) => (
+                <Link
+                  key={route.href}
+                  href={route.href}
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "text-sm font-medium transition-colors hover:text-primary",
+                    route.active ? "text-primary" : "text-muted-foreground",
+                  )}
+                >
+                  {route.label}
+                </Link>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
+        <div className="flex items-center mr-4">
+          <Link href="/" className="flex items-center space-x-2">
+            <Image src="/logo.png" alt="Creavibe.pro Logo" width={32} height={32} />
+            <span className="font-bold text-xl">Creavibe.pro</span>
           </Link>
         </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium flex-1">
+          {routes.map((route) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={route.href}
+              href={route.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === link.href ? "text-primary" : "text-muted-foreground",
+                "transition-colors hover:text-primary",
+                route.active ? "text-primary" : "text-muted-foreground",
               )}
             >
-              {link.label}
+              {route.label}
             </Link>
           ))}
         </nav>
-
-        {/* User Actions */}
-        <div className="flex items-center gap-2">
-          {!isLoading && (
+        <div className="flex items-center space-x-2">
+          {user ? (
             <>
-              {user ? (
-                <>
-                  {/* Notification Bell */}
-                  <NotificationBell
-                    notifications={notifications}
-                    onMarkAsRead={onMarkAsRead}
-                    onMarkAllAsRead={onMarkAllAsRead}
-                    onClearAll={onClearAll}
-                    className="hidden sm:block"
-                  />
-
-                  {/* User Avatar & Dropdown */}
-                  <UserNav user={user} onSignOut={signOut} />
-                </>
-              ) : (
-                <>
-                  <Link href="/login">
-                    <Button variant="ghost" size="sm" className="hidden sm:flex">
-                      Log in
-                    </Button>
-                  </Link>
-                  <Link href="/signup">
-                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-                      Get Started
-                    </Button>
-                  </Link>
-                </>
-              )}
+              <NotificationBell />
+              <UserNav />
+            </>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button variant="ghost">Login</Button>
+              </Link>
+              <Link href="/signup">
+                <Button>Sign up</Button>
+              </Link>
             </>
           )}
-
-          {/* Mobile Menu */}
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <div className="flex flex-col gap-6 py-6">
-                <Link href="/" className="flex items-center gap-2">
-                  <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-XIfiZJ59NEYx0A5RffblInOIVGVlsP.png"
-                    alt="Creavibe.pro"
-                    width={32}
-                    height={32}
-                    className="h-8 w-auto"
-                  />
-                  <span className="font-bold text-xl">Creavibe.pro</span>
-                </Link>
-
-                <nav className="flex flex-col gap-4">
-                  {navLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className={cn(
-                        "text-sm font-medium transition-colors hover:text-primary",
-                        pathname === link.href ? "text-primary" : "text-muted-foreground",
-                      )}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </nav>
-
-                {user ? (
-                  <div className="flex flex-col gap-4 mt-auto">
-                    <div className="flex items-center gap-4 py-4">
-                      <Avatar>
-                        <AvatarImage src={user.image || "/placeholder.svg"} alt={user.name} />
-                        <AvatarFallback>{user.name?.charAt(0) || "U"}</AvatarFallback>
-                      </Avatar>
-                      <div className="flex flex-col">
-                        <span className="text-sm font-medium">{user.name}</span>
-                        <span className="text-xs text-muted-foreground">{user.email}</span>
-                      </div>
-                    </div>
-                    <Button variant="outline" onClick={signOut}>
-                      Log out
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="flex flex-col gap-2 mt-auto">
-                    <Link href="/login">
-                      <Button variant="outline" className="w-full">
-                        Log in
-                      </Button>
-                    </Link>
-                    <Link href="/signup">
-                      <Button className="w-full bg-purple-600 hover:bg-purple-700">Get Started</Button>
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </SheetContent>
-          </Sheet>
         </div>
       </div>
     </header>
