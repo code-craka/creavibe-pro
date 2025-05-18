@@ -73,7 +73,6 @@ export default async function DocPage({ params }: DocPageProps) {
           Edit on GitHub
         </a>
       </div>
-      {/* Use the server component to render MDX content */}
       <DocContent content={doc.content} />
     </div>
   )

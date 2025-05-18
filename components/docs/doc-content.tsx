@@ -1,7 +1,9 @@
+"use server"
+
 import type React from "react"
-;("use server")
 import { compileMDX } from "next-mdx-remote/rsc"
 import { cn } from "@/lib/utils"
+import { ContentGenerator } from "@/components/content-generator/content-generator"
 
 // Define component types
 interface CodeBlockProps {
@@ -106,6 +108,7 @@ const components = {
       />
     )
   },
+  ContentGenerator: ContentGenerator,
 }
 
 interface DocContentProps {
@@ -114,14 +117,30 @@ interface DocContentProps {
 
 // Server component for rendering MDX content
 export async function DocContent({ content }: DocContentProps) {
-  // Use compileMDX from next-mdx-remote/rsc for server-side rendering
-  const { content: renderedContent } = await compileMDX({
-    source: content,
-    components,
-    options: {
-      parseFrontmatter: true,
-    },
-  })
+  try {
+    // Use compileMDX from next-mdx-remote/rsc for server-side rendering
+    const { content: renderedContent } = await compileMDX({
+      source: content,
+      components,
+      options: {
+        parseFrontmatter: true,
+        scope: {
+          // Add any variables or functions that might be referenced in MDX
+          generate: (props: any) => <div>Content generation placeholder</div>,
+        },
+      },
+    })
 
-  return <div className="mdx">{renderedContent}</div>
+    return <div className="mdx">{renderedContent}</div>
+  } catch (error) {
+    console.error("Error rendering MDX content:", error)
+    return (
+      <div className="p-4 border border-red-300 bg-red-50 rounded-md">
+        <h3 className="text-red-800 font-medium">Error rendering documentation</h3>
+        <p className="text-red-600">
+          There was an error rendering this documentation. Please check the console for details.
+        </p>
+      </div>
+    )
+  }
 }

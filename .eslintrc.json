@@ -1,0 +1,7 @@
+{
+  "plugins": ["react-server"],
+  "rules": {
+    "react-server/use-server-directive-format": "error",
+    "react-server/use-server-directive-position": "error"
+  }
+}

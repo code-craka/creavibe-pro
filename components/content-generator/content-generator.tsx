@@ -1,65 +1,83 @@
 "use client"
 
-import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BlogGenerator } from "./blog-generator"
-import { ImageGenerator } from "./image-generator"
-import { VideoScriptGenerator } from "./video-script-generator"
-import { FileText, ImageIcon, Video } from "lucide-react"
+import React from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
-export function ContentGenerator() {
-  const [activeTab, setActiveTab] = useState("blog")
+interface ContentGeneratorProps {
+  type?: "blog" | "image" | "video"
+  topic?: string
+}
+
+export function ContentGenerator({ type = "blog", topic = "" }: ContentGeneratorProps) {
+  const [contentType, setContentType] = React.useState(type)
+  const [contentTopic, setContentTopic] = React.useState(topic)
+  const [isGenerating, setIsGenerating] = React.useState(false)
+  const [generatedContent, setGeneratedContent] = React.useState("")
+
+  const handleGenerate = () => {
+    setIsGenerating(true)
+
+    // Simulate content generation
+    setTimeout(() => {
+      setGeneratedContent(
+        contentType === "blog"
+          ? `# ${contentTopic}\n\nThis is a sample generated blog post about ${contentTopic}. In a real implementation, this would be AI-generated content based on your topic and preferences.\n\n## Key Points\n\n- Point 1 about ${contentTopic}\n- Point 2 about ${contentTopic}\n- Point 3 about ${contentTopic}`
+          : contentType === "image"
+            ? "Image generation placeholder. In a real implementation, this would generate an image based on your topic."
+            : "Video script generation placeholder. In a real implementation, this would generate a video script based on your topic.",
+      )
+      setIsGenerating(false)
+    }, 1500)
+  }
 
   return (
-    <div className="container mx-auto py-6 px-4 md:px-6">
-      <div className="mb-8 space-y-4">
-        <h1 className="text-3xl font-bold tracking-tight">AI Content Generator</h1>
-        <p className="text-muted-foreground">Create high-quality content with our AI-powered generation tools.</p>
-      </div>
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle>AI Content Generator</CardTitle>
+        <CardDescription>Generate content using AI based on your topic</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="content-type">Content Type</Label>
+          <Select value={contentType} onValueChange={(value: any) => setContentType(value)}>
+            <SelectTrigger id="content-type">
+              <SelectValue placeholder="Select content type" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="blog">Blog Post</SelectItem>
+              <SelectItem value="image">Image</SelectItem>
+              <SelectItem value="video">Video Script</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
 
-      <Tabs defaultValue="blog" value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-        <TabsList className="grid w-full grid-cols-3 md:w-auto">
-          <TabsTrigger value="blog" className="flex items-center gap-2">
-            <FileText className="h-4 w-4" />
-            <span className="hidden sm:inline">Blog</span>
-          </TabsTrigger>
-          <TabsTrigger value="image" className="flex items-center gap-2">
-            <ImageIcon className="h-4 w-4" />
-            <span className="hidden sm:inline">Image</span>
-          </TabsTrigger>
-          <TabsTrigger value="video" className="flex items-center gap-2">
-            <Video className="h-4 w-4" />
-            <span className="hidden sm:inline">Video Script</span>
-          </TabsTrigger>
-        </TabsList>
+        <div className="space-y-2">
+          <Label htmlFor="topic">Topic</Label>
+          <Textarea
+            id="topic"
+            placeholder="Enter your content topic or description"
+            value={contentTopic}
+            onChange={(e) => setContentTopic(e.target.value)}
+            className="min-h-20"
+          />
+        </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>
-              {activeTab === "blog" && "Blog Generator"}
-              {activeTab === "image" && "Image Generator"}
-              {activeTab === "video" && "Video Script Generator"}
-            </CardTitle>
-            <CardDescription>
-              {activeTab === "blog" && "Generate engaging blog posts with AI assistance."}
-              {activeTab === "image" && "Create custom images based on your descriptions."}
-              {activeTab === "video" && "Craft compelling video scripts for your content."}
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <TabsContent value="blog" className="mt-0">
-              <BlogGenerator />
-            </TabsContent>
-            <TabsContent value="image" className="mt-0">
-              <ImageGenerator />
-            </TabsContent>
-            <TabsContent value="video" className="mt-0">
-              <VideoScriptGenerator />
-            </TabsContent>
-          </CardContent>
-        </Card>
-      </Tabs>
-    </div>
+        {generatedContent && (
+          <div className="space-y-2 mt-4">
+            <Label>Generated Content</Label>
+            <div className="p-4 bg-muted rounded-md whitespace-pre-wrap font-mono text-sm">{generatedContent}</div>
+          </div>
+        )}
+      </CardContent>
+      <CardFooter>
+        <Button onClick={handleGenerate} disabled={isGenerating || !contentTopic.trim()} className="w-full">
+          {isGenerating ? "Generating..." : "Generate Content"}
+        </Button>
+      </CardFooter>
+    </Card>
   )
 }

@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Removed: swcMinify: true (deprecated in Next.js 15.2.4)
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -15,7 +14,7 @@ const nextConfig = {
   experimental: {
     // Disable static optimization for MDX pages to ensure server-side rendering
     mdxRs: false,
-    serverComponentsExternalPackages: ["shiki"],
+    serverExternalPackages: ["shiki"],
   },
   // Configure webpack to handle MDX files
   webpack: (config) => {

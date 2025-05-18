@@ -51,12 +51,7 @@ export function TeamPhotos() {
 
         <Card className="overflow-hidden shadow-lg">
           <div className="aspect-video relative">
-            <Image
-              src="/placeholder.svg?height=600&width=800&query=team celebrating launch"
-              alt="Product launch celebration"
-              fill
-              className="object-cover"
-            />
+            <Image src="/team-launch-celebration.png" alt="Product launch celebration" fill className="object-cover" />
           </div>
           <CardContent className="p-4">
             <p className="text-sm text-gray-600">Celebrating our latest product launch</p>

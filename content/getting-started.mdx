@@ -1,81 +1,65 @@
+---
+title: Getting Started with Creavibe.pro
+description: Learn how to get started with Creavibe.pro's AI-powered content creation platform.
+---
+
 # Getting Started with Creavibe.pro
 
-Welcome to the Creavibe.pro developer documentation! This guide will help you get started with our API and SDK.
+Welcome to Creavibe.pro! This guide will help you get started with our AI-powered content creation platform.
 
-## Overview
+## Creating Your Account
 
-Creavibe.pro is a modern SaaS platform for AI-powered content creation and real-time creative collaboration. Our API allows you to integrate Creavibe.pro's powerful features into your own applications.
+1. Visit [Creavibe.pro](https://creavibe.pro) and click on the "Get Started" button
+2. Fill in your details in the registration form
+3. Verify your email address
+4. Set up your profile
 
-## Prerequisites
+## Setting Up Your First Project
 
-Before you begin, you'll need:
+To create your first project:
 
-- A Creavibe.pro account
-- API credentials (API key or OAuth client ID and secret)
-- Basic knowledge of REST APIs
+1. Navigate to the Dashboard
+2. Click on "New Project"
+3. Choose a project type (Blog, Image, or Video)
+4. Give your project a name
+5. Start creating!
 
-## Installation
+## Using AI Content Generation
 
-### Using npm
+Creavibe.pro offers powerful AI tools to help you create content:
 
-\`\`\`bash
-npm install @creavibe/sdk
-\`\`\`
+\`\`\`jsx
+// Example of using the AI content generator
+import { ContentGenerator } from '@/components/content-generator';
 
-### Using yarn
-
-\`\`\`bash
-yarn add @creavibe/sdk
-\`\`\`
-
-### Using pnpm
-
-\`\`\`bash
-pnpm add @creavibe/sdk
-\`\`\`
-
-## Quick Start
-
-Here's a simple example of how to use the Creavibe.pro SDK:
-
-\`\`\`typescript
-import { Creavibe } from '@creavibe/sdk';
-
-// Initialize the client
-const creavibe = new Creavibe({
-  apiKey: 'your-api-key',
-});
-
-// Create a new project
-async function createProject() {
-  try {
-    const project = await creavibe.projects.create({
-      name: 'My First Project',
-      description: 'A project created via the API',
-    });
-    
-    console.log('Project created:', project);
-  } catch (error) {
-    console.error('Error creating project:', error);
-  }
+export default function MyProject() {
+  return (
+    <ContentGenerator 
+      type="blog" 
+      topic="Digital Marketing Trends" 
+    />
+  );
 }
-
-createProject();
 \`\`\`
 
-## Next Steps
+## Collaborating with Your Team
 
-- [Authentication](/docs/authentication) - Learn more about authentication options
-- [API Reference](/docs/api-reference) - Explore the full API reference
-- [Examples](/docs/examples) - See more code examples
+Invite team members to collaborate on your projects:
 
-## Support
+1. Go to Project Settings
+2. Click on "Team Members"
+3. Enter email addresses of team members
+4. Assign appropriate roles (Editor, Viewer, Admin)
 
-If you need help, you can:
+## Getting Help
 
-- [Join our Discord community](https://discord.gg/creavibe)
-- [Contact our support team](mailto:support@creavibe.pro)
-- [Open an issue on GitHub](https://github.com/creavibe/sdk/issues)
+If you need assistance, you can:
+
+- Check our [Documentation](/docs)
+- Contact support at support@creavibe.pro
+- Join our [Community Hub](/community)
+
+We're excited to see what you'll create with Creavibe.pro!
 \`\`\`
 
-Let's create a sample markdown file for the authentication page:
+Now, let's update the `components/docs/doc-content.tsx` file to fix the issue:
