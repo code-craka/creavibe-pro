@@ -1,59 +1,32 @@
-"use client"
-
 import type React from "react"
-
-import { useState } from "react"
-import { MDXRemote } from "next-mdx-remote"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism"
-import { Check, Copy } from "lucide-react"
+;("use server")
+import { compileMDX } from "next-mdx-remote/rsc"
 import { cn } from "@/lib/utils"
 
+// Define component types
 interface CodeBlockProps {
   children: string
   className?: string
   language?: string
 }
 
+// Server-side code block component
 function CodeBlock({ children, className, language }: CodeBlockProps) {
-  const [copied, setCopied] = useState(false)
-
   const lang = language || className?.replace(/language-/, "") || "typescript"
-
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(children)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
 
   return (
     <div className="relative my-4 overflow-hidden rounded-lg border">
       <div className="flex items-center justify-between bg-muted px-4 py-2">
         <span className="text-xs font-medium">{lang}</span>
-        <button
-          onClick={copyToClipboard}
-          className="flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-accent hover:text-accent-foreground"
-          aria-label="Copy code"
-        >
-          {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-        </button>
       </div>
-      <SyntaxHighlighter
-        language={lang}
-        style={vscDarkPlus}
-        customStyle={{
-          margin: 0,
-          padding: "1rem",
-          fontSize: "0.9rem",
-          lineHeight: 1.5,
-        }}
-      >
-        {children}
-      </SyntaxHighlighter>
+      <pre className="m-0 overflow-x-auto p-4 text-sm">
+        <code className={`language-${lang}`}>{children}</code>
+      </pre>
     </div>
   )
 }
 
+// Define all MDX components as server components
 const components = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1 className={cn("mt-10 scroll-m-20 text-4xl font-bold tracking-tight", className)} {...props} />
@@ -139,10 +112,16 @@ interface DocContentProps {
   content: string
 }
 
-export function DocContent({ content }: DocContentProps) {
-  return (
-    <div className="mdx">
-      <MDXRemote source={content} components={components} />
-    </div>
-  )
+// Server component for rendering MDX content
+export async function DocContent({ content }: DocContentProps) {
+  // Use compileMDX from next-mdx-remote/rsc for server-side rendering
+  const { content: renderedContent } = await compileMDX({
+    source: content,
+    components,
+    options: {
+      parseFrontmatter: true,
+    },
+  })
+
+  return <div className="mdx">{renderedContent}</div>
 }
