@@ -4,6 +4,15 @@ The Advanced User Settings page provides a comprehensive interface for users to 
 
 ## Features
 
+### API Token Analytics
+- **Usage Dashboard**: Comprehensive dashboard showing key API usage metrics
+- **Request Visualization**: Interactive charts showing API usage patterns over time
+- **Detailed Request Logs**: Searchable and filterable logs of all API requests
+- **Error Analysis**: Breakdown of error rates and common error types
+- **Usage Alerts**: Configurable thresholds for usage notifications
+- **Performance Metrics**: Response time and data transfer analytics
+- **Usage Recommendations**: AI-powered suggestions for optimizing API usage
+
 ### Data Export
 - **Multiple Export Formats**: Export data in JSON, CSV, and Excel (XLSX) formats
 - **Selective Data Export**: Choose specific data types to export
@@ -40,6 +49,9 @@ export default function SettingsPage() {
 ### UserSettingsPage
 The main component that renders the tabbed settings interface.
 
+### ApiTokenAnalytics
+Provides detailed analytics and insights for API token usage.
+
 ### DataExportSettings
 Manages data export functionality with format selection, data type filtering, and export history.
 
@@ -60,6 +72,19 @@ Controls notification preferences across different channels.
 
 ### SecuritySettings
 Handles password management, two-factor authentication, and security options.
+
+## API Token Analytics
+
+The API token analytics functionality provides:
+
+1. **Usage Overview**: Dashboard with key metrics (total requests, success rate, response time, data transfer)
+2. **Usage Trends**: Charts showing API usage patterns over time
+3. **Request Logs**: Detailed, searchable logs of all API requests
+4. **Endpoint Analysis**: Insights into most frequently used endpoints
+5. **Error Analysis**: Breakdown of error rates by status code
+6. **Usage Alerts**: Configurable thresholds for usage notifications
+7. **Performance Insights**: Response time and data transfer analytics
+8. **Usage Recommendations**: AI-powered suggestions for optimizing API usage
 
 ## Data Export
 

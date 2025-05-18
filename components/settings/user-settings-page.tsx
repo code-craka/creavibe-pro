@@ -11,6 +11,7 @@ import { UserIcon, PaletteIcon, LinkIcon, BellIcon, ShieldIcon } from "lucide-re
 import { DataExportSettings } from "@/components/settings/data-export-settings"
 import { ApiTokenSettings } from "@/components/settings/api-token-settings"
 import { DatabaseIcon, KeyIcon } from "lucide-react"
+import { ApiTokenAnomalyDetection } from "./api-token-anomaly-detection"
 
 export function UserSettingsPage() {
   const [activeTab, setActiveTab] = useState("profile")
@@ -101,6 +102,7 @@ export function UserSettingsPage() {
 
         <TabsContent value="api-tokens" className="space-y-6">
           <ApiTokenSettings />
+          <ApiTokenAnomalyDetection />
         </TabsContent>
       </Tabs>
     </div>
