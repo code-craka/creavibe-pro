@@ -1,0 +1,110 @@
+import type { Integration } from "@/types/integrations"
+
+const integrations: Integration[] = [
+  {
+    id: "notion",
+    name: "Notion",
+    description: "Connect your Notion workspace to import and export content seamlessly.",
+    iconUrl: "/integrations/notion.png",
+    categories: ["Productivity", "Content"],
+    isConnected: false,
+    isPopular: true,
+  },
+  {
+    id: "slack",
+    name: "Slack",
+    description: "Get notifications and share content directly to your Slack channels.",
+    iconUrl: "/integrations/slack.png",
+    categories: ["Communication", "Collaboration"],
+    isConnected: true,
+    isPopular: true,
+  },
+  {
+    id: "github",
+    name: "GitHub",
+    description: "Sync your content with GitHub repositories for version control.",
+    iconUrl: "/integrations/github.png",
+    categories: ["Development", "Collaboration"],
+    isConnected: false,
+  },
+  {
+    id: "stripe",
+    name: "Stripe",
+    description: "Process payments and manage subscriptions with Stripe integration.",
+    iconUrl: "/integrations/stripe.png",
+    categories: ["Payment", "Finance"],
+    isConnected: false,
+  },
+  {
+    id: "google-drive",
+    name: "Google Drive",
+    description: "Store and access your content directly from Google Drive.",
+    iconUrl: "/integrations/google-drive.png",
+    categories: ["Storage", "Productivity"],
+    isConnected: false,
+    isPopular: true,
+  },
+  {
+    id: "dropbox",
+    name: "Dropbox",
+    description: "Sync your content with Dropbox for easy access and sharing.",
+    iconUrl: "/integrations/dropbox.png",
+    categories: ["Storage", "Collaboration"],
+    isConnected: false,
+  },
+  {
+    id: "zapier",
+    name: "Zapier",
+    description: "Connect Creavibe.pro with thousands of apps through Zapier automations.",
+    iconUrl: "/integrations/zapier.png",
+    categories: ["Automation", "Productivity"],
+    isConnected: false,
+    isPopular: true,
+  },
+  {
+    id: "mailchimp",
+    name: "Mailchimp",
+    description: "Export your content directly to Mailchimp for email campaigns.",
+    iconUrl: "/integrations/mailchimp.png",
+    categories: ["Marketing", "Communication"],
+    isConnected: false,
+  },
+  {
+    id: "airtable",
+    name: "Airtable",
+    description: "Organize and structure your content with Airtable integration.",
+    iconUrl: "/integrations/airtable.png",
+    categories: ["Productivity", "Organization"],
+    isConnected: false,
+  },
+  {
+    id: "figma",
+    name: "Figma",
+    description: "Import designs from Figma directly into your content projects.",
+    iconUrl: "/integrations/figma.png",
+    categories: ["Design", "Collaboration"],
+    isConnected: false,
+    isNew: true,
+  },
+  {
+    id: "google-analytics",
+    name: "Google Analytics",
+    description: "Track performance and engagement of your published content.",
+    iconUrl: "/integrations/google-analytics.png",
+    categories: ["Analytics", "Marketing"],
+    isConnected: false,
+  },
+  {
+    id: "trello",
+    name: "Trello",
+    description: "Manage your content workflow with Trello boards and cards.",
+    iconUrl: "/integrations/trello.png",
+    categories: ["Productivity", "Organization"],
+    isConnected: false,
+  },
+]
+
+export async function getIntegrations(): Promise<Integration[]> {
+  // In a real app, this would be an API call
+  return integrations
+}

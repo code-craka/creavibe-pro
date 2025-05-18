@@ -1,22 +1,33 @@
 /**
- * Environment variables configuration for Creavibe.pro
- *
- * This file documents the environment variables used in the application
- * and provides fallbacks for development environments.
+ * Server-side environment variables
+ * IMPORTANT: This file should only be imported in server components or API routes
  */
 
-// Supabase Configuration
-// These values are hardcoded for development but should be set as environment variables in production
-export const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "https://bfqomtgojmesytihgvte.supabase.co"
-export const SUPABASE_ANON_KEY =
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJmcW9tdGdvam1lc3l0aWhndnRlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc1MTYyMjQsImV4cCI6MjA2MzA5MjIyNH0.WHDSP665fmYJEIG3kHJyBXmLCR0edshk0W7LgiowcPA"
+// Safely get environment variables with fallbacks
+export const getEnv = (key: string, defaultValue = ""): string => {
+  return process.env[key] || defaultValue
+}
 
-// Environment detection
-export const IS_DEVELOPMENT = process.env.NODE_ENV === "development"
-export const IS_PRODUCTION = process.env.NODE_ENV === "production"
-export const IS_TEST = process.env.NODE_ENV === "test"
+// Server environment
+export const NODE_ENV = getEnv("NODE_ENV", "development")
+export const IS_PRODUCTION = NODE_ENV === "production"
+export const IS_DEVELOPMENT = NODE_ENV === "development"
+export const IS_TEST = NODE_ENV === "test"
 
-// Application URLs
-export const APP_URL =
-  process.env.NEXT_PUBLIC_APP_URL || (IS_DEVELOPMENT ? "http://localhost:3000" : "https://creavibe.pro")
+// Database
+export const POSTGRES_URL = getEnv("POSTGRES_URL")
+export const POSTGRES_PRISMA_URL = getEnv("POSTGRES_PRISMA_URL")
+export const POSTGRES_URL_NON_POOLING = getEnv("POSTGRES_URL_NON_POOLING")
+export const POSTGRES_USER = getEnv("POSTGRES_USER")
+export const POSTGRES_HOST = getEnv("POSTGRES_HOST")
+export const POSTGRES_PASSWORD = getEnv("POSTGRES_PASSWORD")
+export const POSTGRES_DATABASE = getEnv("POSTGRES_DATABASE")
+
+// Supabase
+export const SUPABASE_URL = getEnv("SUPABASE_URL")
+export const SUPABASE_ANON_KEY = getEnv("SUPABASE_ANON_KEY")
+export const SUPABASE_SERVICE_ROLE_KEY = getEnv("SUPABASE_SERVICE_ROLE_KEY")
+export const SUPABASE_JWT_SECRET = getEnv("SUPABASE_JWT_SECRET")
+
+// App
+export const APP_URL = getEnv("NEXT_PUBLIC_APP_URL", "http://localhost:3000")

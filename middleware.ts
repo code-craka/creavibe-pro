@@ -3,6 +3,18 @@ import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
 export async function middleware(req: NextRequest) {
+  // Add error handling for API routes
+  if (req.nextUrl.pathname.startsWith("/api/")) {
+    // Clone the response to add error handling
+    return NextResponse.next({
+      headers: {
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "X-XSS-Protection": "1; mode=block",
+      },
+    })
+  }
+
   const res = NextResponse.next()
 
   // Create a Supabase client for the middleware
@@ -41,6 +53,8 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
+    "/api/:path*",
+    "/((?!_next/static|_next/image|favicon.ico).*)",
     "/dashboard/:path*",
     "/profile/:path*",
     "/projects/:path*",

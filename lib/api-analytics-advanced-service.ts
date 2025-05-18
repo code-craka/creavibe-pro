@@ -291,19 +291,19 @@ const mockAnomalyDetectionData: AnomalyDetectionData = {
 }
 
 // API functions
-export async function getPredictiveAnalytics(tokenId: string, timeRange: string): Promise<ApiTokenPrediction[]> {
+async function getPredictiveAnalytics(tokenId: string, timeRange: string): Promise<ApiTokenPrediction[]> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1000))
   return mockPredictiveData
 }
 
-export async function getScenarioPlanning(): Promise<ApiTokenScenario[]> {
+async function getScenarioPlanning(): Promise<ApiTokenScenario[]> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 800))
   return mockScenarios
 }
 
-export async function createScenario(scenario: Omit<ApiTokenScenario, "id">): Promise<ApiTokenScenario> {
+async function createScenario(scenario: Omit<ApiTokenScenario, "id">): Promise<ApiTokenScenario> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1200))
   return {
@@ -312,7 +312,7 @@ export async function createScenario(scenario: Omit<ApiTokenScenario, "id">): Pr
   }
 }
 
-export async function getCompetitiveAnalytics(): Promise<{
+async function getCompetitiveAnalytics(): Promise<{
   competitors: CompetitorData[]
   insights: CompetitiveInsight[]
 }> {
@@ -324,15 +324,35 @@ export async function getCompetitiveAnalytics(): Promise<{
   }
 }
 
-export async function getAnomalyDetectionData(tokenId: string, timeRange: string): Promise<AnomalyDetectionData> {
+async function getAnomalyDetectionData(tokenId: string, timeRange: string): Promise<AnomalyDetectionData> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1200))
   return mockAnomalyDetectionData
 }
 
-export async function updateAnomalySettings(settings: AnomalySettings): Promise<void> {
+async function updateAnomalySettings(settings: AnomalySettings): Promise<void> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 800))
   // In a real implementation, this would update the settings on the server
   console.log("Settings updated:", settings)
+}
+
+// Create and export the service object
+export const apiAnalyticsAdvancedService = {
+  getPredictiveAnalytics,
+  getScenarioPlanning,
+  createScenario,
+  getCompetitiveAnalytics,
+  getAnomalyDetectionData,
+  updateAnomalySettings,
+}
+
+// Also export individual functions for backward compatibility
+export {
+  getPredictiveAnalytics,
+  getScenarioPlanning,
+  createScenario,
+  getCompetitiveAnalytics,
+  getAnomalyDetectionData,
+  updateAnomalySettings,
 }

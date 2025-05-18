@@ -1,15 +1,36 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect } from "react"
+import { useTheme } from "next-themes"
+import { TableOfContents } from "./table-of-contents"
+import { ContentRenderer } from "./content-renderer"
+import { TopBar } from "./top-bar"
+import { NavigationControls } from "./navigation-controls"
+import type { WebBook } from "@/types/web-book"
+import { useKeyboardNavigation } from "@/hooks/use-keyboard-navigation"
+import { useMobile } from "@/hooks/use-mobile"
+import { Sheet, SheetContent } from "@/components/ui/sheet"
+import { Button } from "@/components/ui/button"
+import { Menu } from "lucide-react"
 
-// Sample book content
-const sampleBookContent = {
+// Sample book data for demonstration
+const sampleBook: WebBook = {
+  id: "1",
   title: "The Art of Content Creation",
+  description: "A comprehensive guide to creating engaging content in the digital age",
   author: "Jane Smith",
+  createdAt: "2023-01-15T12:00:00Z",
+  updatedAt: "2023-03-20T14:30:00Z",
+  isPublished: true,
+  visibility: "public",
+  theme: "light",
+  fontFamily: "serif",
+  fontSize: "16px",
   chapters: [
     {
       id: "intro",
       title: "Introduction",
+      order: 1,
       content: `
         <h1>Introduction</h1>
         <p>Welcome to "The Art of Content Creation." In this comprehensive guide, we'll explore the fundamentals of creating engaging, valuable content in the digital age.</p>
@@ -18,10 +39,12 @@ const sampleBookContent = {
         <p>In today's information-rich environment, quality content serves as the currency of the internet. It's how we share ideas, build relationships, and establish authority in our respective fields.</p>
         <p>Throughout this book, we'll examine various content formats, strategies, and best practices to help you develop your unique voice and create content that resonates with your target audience.</p>
       `,
+      sections: [],
     },
     {
       id: "chapter1",
       title: "Understanding Your Audience",
+      order: 2,
       content: `
         <h1>Understanding Your Audience</h1>
         <p>Before creating any piece of content, it's essential to have a clear understanding of who you're creating it for. This chapter explores methods for identifying, researching, and connecting with your target audience.</p>
@@ -39,10 +62,25 @@ const sampleBookContent = {
         <p>Understanding your audience goes beyond data points. True connection requires empathy—the ability to see the world from your audience's perspective.</p>
         <p>Ask yourself: What challenges do they face? What goals are they working toward? What language do they use to describe their experiences? How can your content make their lives better?</p>
       `,
+      sections: [
+        {
+          id: "chapter1-section1",
+          title: "Audience Research Techniques",
+          content: "",
+          order: 1,
+        },
+        {
+          id: "chapter1-section2",
+          title: "The Empathy Factor",
+          content: "",
+          order: 2,
+        },
+      ],
     },
     {
       id: "chapter2",
       title: "Content Strategy Fundamentals",
+      order: 3,
       content: `
         <h1>Content Strategy Fundamentals</h1>
         <p>A coherent content strategy serves as the foundation for all your content creation efforts. This chapter covers the essential elements of developing a strategy that aligns with your goals and resonates with your audience.</p>
@@ -64,10 +102,25 @@ const sampleBookContent = {
           <li>Retention: Supporting continued engagement and advanced applications</li>
         </ul>
       `,
+      sections: [
+        {
+          id: "chapter2-section1",
+          title: "Defining Your Content Mission",
+          content: "",
+          order: 1,
+        },
+        {
+          id: "chapter2-section2",
+          title: "Content Mapping",
+          content: "",
+          order: 2,
+        },
+      ],
     },
     {
       id: "chapter3",
       title: "Writing Compelling Content",
+      order: 4,
       content: `
         <h1>Writing Compelling Content</h1>
         <p>The written word remains at the heart of most content strategies. This chapter explores techniques for crafting clear, engaging, and effective written content across various formats.</p>
@@ -90,202 +143,168 @@ const sampleBookContent = {
         </ul>
         <p>Remember that your headline is a promise to your reader. The content that follows must deliver on that promise.</p>
       `,
+      sections: [
+        {
+          id: "chapter3-section1",
+          title: "The Elements of Engaging Writing",
+          content: "",
+          order: 1,
+        },
+        {
+          id: "chapter3-section2",
+          title: "Headlines and Hooks",
+          content: "",
+          order: 2,
+        },
+      ],
     },
   ],
 }
 
-export function WebBookRenderer() {
-  const [currentChapter, setCurrentChapter] = useState(0)
-  const [fontSize, setFontSize] = useState(16)
-  const [theme, setTheme] = useState("light")
-  const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [fullscreen, setFullscreen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const [searchResults, setSearchResults] = useState([])
-  const [showSearch, setShowSearch] = useState(false)
-  const [showHighlighter, setShowHighlighter] = useState(false)
-  const [showNotes, setShowNotes] = useState(false)
-  const [note, setNote] = useState("")
-  const [notes, setNotes] = useState({})
-  const [highlights, setHighlights] = useState([])
-  const [bookmarks, setBookmarks] = useState([])
+interface WebBookRendererProps {
+  book?: WebBook
+  onEditClick?: () => void
+}
 
-  const contentRef = useRef(null)
-  const containerRef = useRef(null)
+export function WebBookRenderer({ book = sampleBook, onEditClick }: WebBookRendererProps) {
+  const [currentChapterId, setCurrentChapterId] = useState(book.chapters[0]?.id || "")
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const isMobile = useMobile()
+
+  // Find current chapter index
+  const currentChapterIndex = book.chapters.findIndex((chapter) => chapter.id === currentChapterId)
+  const currentChapter = book.chapters[currentChapterIndex]
 
   // Handle chapter navigation
   const goToNextChapter = () => {
-    if (currentChapter < sampleBookContent.chapters.length - 1) {
-      setCurrentChapter(currentChapter + 1)
+    if (currentChapterIndex < book.chapters.length - 1) {
+      setCurrentChapterId(book.chapters[currentChapterIndex + 1].id)
     }
   }
 
   const goToPreviousChapter = () => {
-    if (currentChapter > 0) {
-      setCurrentChapter(currentChapter - 1)
+    if (currentChapterIndex > 0) {
+      setCurrentChapterId(book.chapters[currentChapterIndex - 1].id)
     }
   }
 
-  // Handle fullscreen toggle
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      containerRef.current.requestFullscreen().catch((err) => {
-        console.error(`Error attempting to enable fullscreen: ${err.message}`)
-      })
+  // Set up keyboard navigation
+  useKeyboardNavigation({
+    onNextChapter: goToNextChapter,
+    onPreviousChapter: goToPreviousChapter,
+  })
+
+  // Toggle sidebar
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen)
+  }
+
+  // Toggle theme
+  const toggleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
+  // Toggle publish state
+  const togglePublish = () => {
+    // In a real app, this would update the book's published state
+    console.log("Toggle publish state")
+  }
+
+  // Handle edit click
+  const handleEditClick = () => {
+    if (onEditClick) {
+      onEditClick()
     } else {
-      document.exitFullscreen()
-    }
-    setFullscreen(!fullscreen)
-  }
-
-  // Handle search
-  const handleSearch = (e) => {
-    e.preventDefault()
-    if (!searchQuery.trim()) return
-
-    const results = []
-    sampleBookContent.chapters.forEach((chapter, chapterIndex) => {
-      const content = chapter.content.toLowerCase()
-      const query = searchQuery.toLowerCase()
-
-      if (content.includes(query)) {
-        // Find all occurrences
-        let index = content.indexOf(query)
-        while (index !== -1) {
-          const start = Math.max(0, index - 40)
-          const end = Math.min(content.length, index + query.length + 40)
-          let excerpt = content.substring(start, end)
-
-          if (start > 0) excerpt = "..." + excerpt
-          if (end < content.length) excerpt = excerpt + "..."
-
-          results.push({
-            chapterIndex,
-            chapterTitle: chapter.title,
-            excerpt,
-          })
-
-          index = content.indexOf(query, index + 1)
-        }
-      }
-    })
-
-    setSearchResults(results)
-  }
-
-  // Handle bookmark toggle
-  const toggleBookmark = () => {
-    const currentChapterData = sampleBookContent.chapters[currentChapter]
-    const isBookmarked = bookmarks.some((b) => b.id === currentChapterData.id)
-
-    if (isBookmarked) {
-      setBookmarks(bookmarks.filter((b) => b.id !== currentChapterData.id))
-    } else {
-      setBookmarks([
-        ...bookmarks,
-        {
-          id: currentChapterData.id,
-          title: currentChapterData.title,
-          chapterIndex: currentChapter,
-        },
-      ])
+      console.log("Edit in editor")
     }
   }
 
-  // Handle note saving
-  const saveNote = () => {
-    if (!note.trim()) return
-
-    const chapterId = sampleBookContent.chapters[currentChapter].id
-    setNotes({
-      ...notes,
-      [chapterId]: [
-        ...(notes[chapterId] || []),
-        {
-          id: Date.now(),
-          text: note,
-          timestamp: new Date().toISOString(),
-        },
-      ],
-    })
-
-    setNote("")
-  }
-
-  // Handle text highlighting
-  const handleHighlight = () => {
-    const selection = window.getSelection()
-    if (selection.toString().trim() === "") return
-
-    const range = selection.getRangeAt(0)
-    const selectedText = selection.toString()
-    const chapterId = sampleBookContent.chapters[currentChapter].id
-
-    // In a real app, you would need to store the exact position
-    // Here we just store the text for demonstration
-    setHighlights([
-      ...highlights,
-      {
-        id: Date.now(),
-        chapterId,
-        text: selectedText,
-        color: "yellow",
-      },
-    ])
-
-    // Clear selection
-    selection.removeAllRanges()
-    setShowHighlighter(false)
-  }
-
-  // Check if current chapter is bookmarked
-  const isCurrentChapterBookmarked = () => {
-    const currentChapterData = sampleBookContent.chapters[currentChapter]
-    return bookmarks.some((b) => b.id === currentChapterData.id)
-  }
-
-  // Get current chapter notes
-  const getCurrentChapterNotes = () => {
-    const chapterId = sampleBookContent.chapters[currentChapter].id
-    return notes[chapterId] || []
-  }
-
-  // Get current chapter highlights
-  const getCurrentChapterHighlights = () => {
-    const chapterId = sampleBookContent.chapters[currentChapter].id
-    return highlights.filter((h) => h.chapterId === chapterId)
-  }
-
-  // Handle share
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: sampleBookContent.title,
-        text: `Check out this chapter: ${sampleBookContent.chapters[currentChapter].title}`,
-        url: window.location.href,
-      })
-    } else {
-      alert("Share functionality is not available in your browser")
+  // Close mobile nav when selecting a chapter on mobile
+  const handleChapterSelect = (chapterId: string) => {
+    setCurrentChapterId(chapterId)
+    if (isMobile) {
+      setMobileNavOpen(false)
     }
   }
 
-  // Apply theme class
+  // Adjust sidebar based on screen size
   useEffect(() => {
-    if (contentRef.current) {
-      contentRef.current.className = `prose max-w-none ${theme === "dark" ? "prose-invert" : theme === "sepia" ? "prose-sepia" : ""}`
-      contentRef.current.style.fontSize = `${fontSize}px`
-    }
-  }, [theme, fontSize, currentChapter])
+    setSidebarOpen(!isMobile)
+  }, [isMobile])
 
-  // Listen for fullscreen change
-  useEffect(() => {
-    const handleFullscreenChange = () => {
-      setFullscreen(!!document.fullscreenElement)
-    }
+  return (
+    <div className="flex flex-col h-screen">
+      {/* Top Bar */}
+      <TopBar
+        book={book}
+        onToggleSidebar={toggleSidebar}
+        onToggleTheme={toggleTheme}
+        isDarkTheme={theme === "dark"}
+        onTogglePublish={togglePublish}
+        onEditClick={handleEditClick}
+      />
 
-    document.addEventListener("fullscreenchange", handleFullscreenChange)
-    return () => {
-      document.removeEventListener("fullscreenchange", handleFullscreenChange)
-    }
-  }, [])
+      <div className="flex flex-1 overflow-hidden">
+        {/* Desktop Sidebar */}
+        {!isMobile && (
+          <div
+            className={`border-r transition-all duration-300 ${sidebarOpen ? "w-64" : "w-0 opacity-0 overflow-hidden"}`}
+          >
+            {sidebarOpen && (
+              <TableOfContents
+                chapters={book.chapters}
+                currentChapterId={currentChapterId}
+                onChapterSelect={handleChapterSelect}
+              />
+            )}
+          </div>
+        )}
+
+        {/* Mobile Sidebar (Sheet) */}
+        {isMobile && (
+          <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+            <SheetContent side="left" className="p-0 w-[280px]">
+              <TableOfContents
+                chapters={book.chapters}
+                currentChapterId={currentChapterId}
+                onChapterSelect={handleChapterSelect}
+              />
+            </SheetContent>
+          </Sheet>
+        )}
+
+        {/* Main Content Area */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* Mobile Chapter Title */}
+          {isMobile && (
+            <div className="px-4 py-2 border-b flex items-center">
+              <Button variant="ghost" size="sm" className="mr-2 -ml-2" onClick={() => setMobileNavOpen(true)}>
+                <Menu className="h-4 w-4" />
+              </Button>
+              <h2 className="text-sm font-medium truncate">{currentChapter?.title}</h2>
+            </div>
+          )}
+
+          {/* Content Renderer */}
+          <div className="flex-1 overflow-hidden">
+            <ContentRenderer
+              content={currentChapter?.content || ""}
+              fontSize={book.fontSize}
+              fontFamily={book.fontFamily}
+            />
+          </div>
+
+          {/* Navigation Controls */}
+          <NavigationControls
+            chapters={book.chapters}
+            currentChapterIndex={currentChapterIndex}
+            onNextChapter={goToNextChapter}
+            onPreviousChapter={goToPreviousChapter}
+          />
+        </div>
+      </div>
+    </div>
+  )
 }
