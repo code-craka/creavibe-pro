@@ -8,7 +8,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['localhost'],
+    domains: ["localhost"],
     unoptimized: true,
   },
   experimental: {
@@ -24,17 +24,36 @@ const nextConfig = {
       test: /\.mdx?$/,
       use: [
         {
-          loader: '@mdx-js/loader',
+          loader: "@mdx-js/loader",
           options: {
-            providerImportSource: '@mdx-js/react',
+            providerImportSource: "@mdx-js/react",
           },
         },
       ],
-    })
-    
-    return config
-  },
-  // Other config options remain unchanged
-}
+    });
 
-export default nextConfig
+    return config;
+  },
+  // PostHog rewrites
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+      {
+        source: "/ingest/decide",
+        destination: "https://us.i.posthog.com/decide",
+      },
+    ];
+  },
+  // This is required to support PostHog trailing slash API requests
+  skipTrailingSlashRedirect: true,
+  // Other config options remain unchanged
+};
+
+export default nextConfig;
