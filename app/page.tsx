@@ -13,7 +13,7 @@ export default function LandingPage() {
           <div className="flex gap-6 md:gap-10">
             <Link href="/" className="flex items-center space-x-2">
               <Sparkles className="h-6 w-6 text-primary" />
-              <span className="inline-block font-bold">Creavibe.pro</span>
+              <span className="inline-block font-bold">CreaVibe</span>
             </Link>
             <nav className="hidden gap-6 md:flex">
               <Link
@@ -65,7 +65,7 @@ export default function LandingPage() {
                     Create, Collaborate, and Captivate with AI
                   </h1>
                   <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                    Creavibe.pro combines AI-powered content creation with real-time collaboration tools, empowering
+                    CreaVibe combines AI-powered content creation with real-time collaboration tools, empowering
                     marketing teams and creators to produce exceptional content faster than ever.
                   </p>
                 </div>
@@ -95,7 +95,7 @@ export default function LandingPage() {
                     src="/modern-content-dashboard.png"
                     width={700}
                     height={500}
-                    alt="Creavibe.pro dashboard interface"
+                    alt="CreaVibe dashboard interface"
                     className="h-full w-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
@@ -115,7 +115,7 @@ export default function LandingPage() {
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Everything You Need to Create</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Creavibe.pro combines powerful AI tools with intuitive collaboration features to streamline your
+                  CreaVibe combines powerful AI tools with intuitive collaboration features to streamline your
                   content creation workflow.
                 </p>
               </div>
@@ -187,7 +187,7 @@ export default function LandingPage() {
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Trusted by Creators Worldwide</h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  See what our customers are saying about how Creavibe.pro has transformed their content creation
+                  See what our customers are saying about how CreaVibe has transformed their content creation
                   process.
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function LandingPage() {
                     ))}
                   </div>
                   <p className="text-muted-foreground">
-                    "Creavibe.pro has revolutionized our content strategy. We're producing twice the content in half the
+                    "CreaVibe has revolutionized our content strategy. We're producing twice the content in half the
                     time, and the AI-generated drafts are remarkably on-brand."
                   </p>
                 </CardContent>
@@ -273,7 +273,7 @@ export default function LandingPage() {
                   </div>
                   <p className="text-muted-foreground">
                     "We've cut our content production costs by 40% while increasing output by 75%. The ROI with
-                    Creavibe.pro has been incredible for our agency and our clients."
+                    CreaVibe has been incredible for our agency and our clients."
                   </p>
                 </CardContent>
               </Card>
@@ -432,7 +432,7 @@ export default function LandingPage() {
                   Ready to Transform Your Content Creation?
                 </h2>
                 <p className="mx-auto max-w-[700px] md:text-xl">
-                  Join thousands of creators and marketing teams who are already using Creavibe.pro to produce
+                  Join thousands of creators and marketing teams who are already using CreaVibe to produce
                   exceptional content.
                 </p>
               </div>
@@ -460,7 +460,7 @@ export default function LandingPage() {
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <Sparkles className="h-6 w-6 text-primary" />
-                <span className="font-bold">Creavibe.pro</span>
+                <span className="font-bold">CreaVibe</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 AI-powered content creation and real-time collaboration for modern teams.
@@ -613,7 +613,7 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="mt-12 border-t pt-8 text-center text-sm text-muted-foreground">
-            <p>© {new Date().getFullYear()} Creavibe.pro. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} CreaVibe. All rights reserved.</p>
           </div>
         </div>
       </footer>

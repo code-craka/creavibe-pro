@@ -11,13 +11,13 @@ export default function PrivacyPolicyContent() {
         <h2 className="text-2xl font-semibold tracking-tight">Introduction & Contact Information</h2>
         <div className="prose prose-gray max-w-none">
           <p>
-            At Creavibe.pro, we take your privacy seriously. This Privacy Policy explains how TechSci, Inc. collects,
+            At CreaVibe, we take your privacy seriously. This Privacy Policy explains how TechSci, Inc. collects,
             uses, and protects your personal information when you use our platform. We are committed to ensuring that
             your privacy is protected in compliance with the General Data Protection Regulation (GDPR) and other
             applicable privacy laws.
           </p>
           <p>
-            By using Creavibe.pro, you agree to the collection and use of information in accordance with this policy.
+            By using CreaVibe, you agree to the collection and use of information in accordance with this policy.
           </p>
 
           <Card className="mt-6">
@@ -42,8 +42,8 @@ export default function PrivacyPolicyContent() {
                 <div>
                   <dt className="font-medium text-muted-foreground">Email</dt>
                   <dd>
-                    <a href="mailto:hello@creavibe.pro" className="text-primary hover:underline">
-                      hello@creavibe.pro
+                    <a href="mailto:hello@CreaVibe" className="text-primary hover:underline">
+                      hello@CreaVibe
                     </a>
                   </dd>
                 </div>
@@ -591,8 +591,8 @@ export default function PrivacyPolicyContent() {
               <div>
                 <dt className="font-medium text-muted-foreground">Email</dt>
                 <dd>
-                  <a href="mailto:privacy@creavibe.pro" className="text-primary hover:underline">
-                    privacy@creavibe.pro
+                  <a href="mailto:privacy@CreaVibe" className="text-primary hover:underline">
+                    privacy@CreaVibe
                   </a>
                 </dd>
               </div>
@@ -641,8 +641,8 @@ export default function PrivacyPolicyContent() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <a href="mailto:privacy@creavibe.pro" className="text-primary hover:underline">
-                privacy@creavibe.pro
+              <a href="mailto:privacy@CreaVibe" className="text-primary hover:underline">
+                privacy@CreaVibe
               </a>
               <p className="text-sm text-muted-foreground mt-2">For privacy-related inquiries and data requests</p>
             </CardContent>

@@ -10,6 +10,13 @@ import type {
 } from "@/types/api-analytics"
 import { format, subDays, addDays, addMonths, differenceInDays } from "date-fns"
 
+// Define an interface for the daily usage data structure
+export interface DailyUsageData {
+  date: string;
+  requests: number;
+  errors: number;
+}
+
 // Mock API endpoints
 const apiEndpoints = [
   "/api/v1/projects",
@@ -481,6 +488,8 @@ export async function createTokenThreshold(
 // Function to delete a usage threshold
 export async function deleteTokenThreshold(thresholdId: string): Promise<boolean> {
   // In a real application, this would be an API call
+  // The thresholdId parameter would be used here to identify the threshold to delete
+  console.log(`Attempting to delete threshold: ${thresholdId}`); // Example usage
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(true)
@@ -626,7 +635,7 @@ export async function createScenario(scenario: Omit<ApiUsageScenario, "id" | "cr
 }
 
 // Function to delete a scenario
-export async function deleteScenario(scenarioId: string): Promise<boolean> {
+export async function deleteScenario(): Promise<boolean> {
   // In a real application, this would be an API call
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -671,7 +680,7 @@ export function generateComparativeData(
   tokenId: string,
   currentPeriod: { from: Date; to: Date },
   previousPeriod: { from: Date; to: Date },
-): { current: any[]; previous: any[] } {
+): { current: DailyUsageData[]; previous: DailyUsageData[] } {
   const currentDays = differenceInDays(currentPeriod.to, currentPeriod.from) + 1
   const previousDays = differenceInDays(previousPeriod.to, previousPeriod.from) + 1
 
@@ -699,8 +708,8 @@ export function generateComparativeData(
 export function generateDailyUsageData(
   tokenId: string,
   days = 30,
-): { date: string; requests: number; errors: number }[] {
-  const data = []
+): DailyUsageData[] {
+  const data: DailyUsageData[] = []
   const today = new Date()
 
   for (let i = days - 1; i >= 0; i--) {

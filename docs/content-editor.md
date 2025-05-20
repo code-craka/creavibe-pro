@@ -1,6 +1,6 @@
 # Content Editor Component Documentation
 
-The Content Editor is a full-featured markdown editor component for the Creavibe.pro SaaS application. It provides a tabbed interface with editor, preview, and history functionality, along with AI content regeneration capabilities.
+The Content Editor is a full-featured markdown editor component for the CreaVibe SaaS application. It provides a tabbed interface with editor, preview, and history functionality, along with AI content regeneration capabilities.
 
 ## Features
 

@@ -1,6 +1,6 @@
 # NotificationBell Component Documentation
 
-The NotificationBell component is a responsive bell icon button with a dropdown notification menu for the Creavibe.pro application. It provides a clean and intuitive way for users to view and manage their notifications.
+The NotificationBell component is a responsive bell icon button with a dropdown notification menu for the CreaVibe application. It provides a clean and intuitive way for users to view and manage their notifications.
 
 ## Features
 
@@ -63,7 +63,7 @@ function Header() {
   
   return (
     <header className="flex justify-between items-center p-4">
-      <h1>Creavibe.pro</h1>
+      <h1>CreaVibe</h1>
       <div className="flex items-center gap-4">
         <NotificationBell
           notifications={notifications}

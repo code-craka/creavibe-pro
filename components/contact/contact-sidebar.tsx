@@ -27,8 +27,8 @@ export function ContactSidebar() {
             <div>
               <h3 className="font-semibold">Email</h3>
               <p className="text-gray-600">
-                <a href="mailto:support@creavibe.pro" className="hover:text-purple-600">
-                  support@creavibe.pro
+                <a href="mailto:support@creavibe.app" className="hover:text-purple-600">
+                  support@creavibe.app
                 </a>
               </p>
             </div>

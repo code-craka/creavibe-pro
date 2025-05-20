@@ -55,7 +55,8 @@ export function ApiTokenAnomalyDetection() {
     const fetchData = async () => {
       setLoading(true)
       try {
-        const data = await getAnomalyDetectionData(selectedToken, timeRange)
+        // getAnomalyDetectionData doesn't accept parameters
+        const data = await getAnomalyDetectionData()
         setAnomalyData(data)
       } catch (error) {
         console.error("Error fetching anomaly detection data:", error)

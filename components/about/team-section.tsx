@@ -5,25 +5,25 @@ const teamMembers = [
   {
     name: "Alex Morgan",
     title: "Founder & CEO",
-    bio: "Former AI researcher with a passion for creative tools. Founded Creavibe.pro to bridge the gap between AI and human creativity.",
+    bio: "Former AI researcher with a passion for creative tools. Founded CreaVibe to bridge the gap between AI and human creativity.",
     image: "/authors/alex-morgan.png",
   },
   {
     name: "Jamie Chen",
     title: "Chief Technology Officer",
-    bio: "AI specialist with 10+ years experience building scalable platforms. Leads Creavibe.pro's technical vision and innovation.",
+    bio: "AI specialist with 10+ years experience building scalable platforms. Leads CreaVibe's technical vision and innovation.",
     image: "/authors/jamie-chen.png",
   },
   {
     name: "Taylor Wilson",
     title: "Head of Product",
-    bio: "Product visionary with experience at leading SaaS companies. Ensures Creavibe.pro meets the needs of modern content creators.",
+    bio: "Product visionary with experience at leading SaaS companies. Ensures CreaVibe meets the needs of modern content creators.",
     image: "/authors/taylor-wilson.png",
   },
   {
     name: "Jordan Rivera",
     title: "Head of Marketing",
-    bio: "Digital marketing expert who practices what we preach. Uses Creavibe.pro daily to create compelling marketing campaigns.",
+    bio: "Digital marketing expert who practices what we preach. Uses CreaVibe daily to create compelling marketing campaigns.",
     image: "/professional-headshot.png",
   },
 ]

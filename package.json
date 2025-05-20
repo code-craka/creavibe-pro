@@ -1,12 +1,17 @@
 {
-  "name": "my-v0-project",
+  "name": "creavibe",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "playwright test",
+    "test:auth": "playwright test tests/auth/",
+    "test:setup-auth": "ts-node tests/setup-auth-tests.ts",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -52,7 +57,7 @@
     "fs": "latest",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
-    "next": "15.2.4",
+    "next": "15.3.2",
     "next-mdx-remote": "latest",
     "next-themes": "latest",
     "path": "latest",
@@ -68,6 +73,7 @@
     "remark-gfm": "latest",
     "shiki": "latest",
     "sonner": "^1.7.1",
+    "stripe": "^18.1.0",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "latest",
@@ -75,11 +81,28 @@
     "zod": "latest"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52.0",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript-eslint/eslint-plugin": "^8.32.1",
+    "@typescript-eslint/parser": "^8.32.1",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.27.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-next": "^15.3.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "node-fetch": "^2.7.0",
+    "playwright": "^1.52.0",
     "postcss": "^8",
+    "prettier": "^3.5.3",
     "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

@@ -12,6 +12,7 @@ export interface Database {
           avatar_url: string | null
           website: string | null
           bio: string | null
+          subscription_plan: Database['public']['Enums']['subscription_plan'] | null
         }
         Insert: {
           id: string
@@ -21,6 +22,7 @@ export interface Database {
           avatar_url?: string | null
           website?: string | null
           bio?: string | null
+          subscription_plan?: Database['public']['Enums']['subscription_plan'] | null
         }
         Update: {
           id?: string
@@ -30,6 +32,7 @@ export interface Database {
           avatar_url?: string | null
           website?: string | null
           bio?: string | null
+          subscription_plan?: Database['public']['Enums']['subscription_plan'] | null
         }
       }
       projects: {
@@ -57,6 +60,47 @@ export interface Database {
           description?: string | null
           user_id?: string
         }
+      },
+      subscriptions: {
+        Row: {
+          id: string
+          user_id: string
+          stripe_customer_id: string | null
+          stripe_subscription_id: string | null
+          price_id: string | null
+          status: string
+          current_period_start: string | null
+          current_period_end: string | null
+          cancel_at_period_end: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          price_id?: string | null
+          status: string
+          current_period_start?: string | null
+          current_period_end?: string | null
+          cancel_at_period_end?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          user_id?: string
+          stripe_customer_id?: string | null
+          stripe_subscription_id?: string | null
+          price_id?: string | null
+          status?: string
+          current_period_start?: string | null
+          current_period_end?: string | null
+          cancel_at_period_end?: boolean
+          created_at?: string
+          updated_at?: string
+        }
       }
     }
     Views: {
@@ -66,7 +110,8 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      subscription_status: 'active' | 'canceled' | 'incomplete' | 'incomplete_expired' | 'past_due' | 'trialing' | 'unpaid'
+      subscription_plan: 'free' | 'basic' | 'pro' | 'enterprise'
     }
   }
 }

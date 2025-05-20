@@ -9,7 +9,7 @@ export default function ChangelogHeader() {
       </div>
       <h1 className="text-4xl font-bold tracking-tight">Changelog</h1>
       <p className="text-xl text-muted-foreground max-w-3xl">
-        Stay up to date with all the latest features, improvements, and bug fixes for Creavibe.pro.
+        Stay up to date with all the latest features, improvements, and bug fixes for CreaVibe.
       </p>
     </div>
   )

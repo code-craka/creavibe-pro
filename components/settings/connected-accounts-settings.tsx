@@ -1,6 +1,16 @@
 "use client"
 
 import { useState } from "react"
+
+// Define the account type
+type ConnectedAccount = {
+  id: string
+  name: string
+  icon: string
+  connected: boolean
+  email: string | null
+  lastUsed: string | null
+}
 import { AlertCircle, Check, ExternalLink, Link2, Unlink } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -62,7 +72,7 @@ const initialAccounts = [
 
 export function ConnectedAccountsSettings() {
   const { toast } = useToast()
-  const [accounts, setAccounts] = useState(initialAccounts)
+  const [accounts, setAccounts] = useState<ConnectedAccount[]>(initialAccounts)
   const [disconnectAccount, setDisconnectAccount] = useState<string | null>(null)
   const [isConnecting, setIsConnecting] = useState<string | null>(null)
 
@@ -74,27 +84,25 @@ export function ConnectedAccountsSettings() {
 
     // Update accounts state
     setAccounts((prev) =>
-      prev.map((account) =>
-        account.id === accountId
-          ? {
-              ...account,
-              connected: true,
-              email:
-                account.id === "google"
-                  ? "alex.johnson@gmail.com"
-                  : account.id === "facebook"
-                    ? "alex.johnson"
-                    : account.id === "github"
-                      ? "alexjohnson"
-                      : account.id === "linkedin"
-                        ? "alex-johnson"
-                        : account.id === "twitter"
-                          ? "alexjohnson"
-                          : null,
-              lastUsed: "Just now",
-            }
-          : account,
-      ),
+      prev.map((account) => {
+        if (account.id === accountId) {
+          // Determine the email based on account type
+          let email: string | null = null;
+          if (account.id === "google") email = "alex.johnson@gmail.com";
+          else if (account.id === "facebook") email = "alex.johnson";
+          else if (account.id === "github") email = "alexjohnson";
+          else if (account.id === "linkedin") email = "alex-johnson";
+          else if (account.id === "twitter") email = "alexjohnson";
+          
+          return {
+            ...account,
+            connected: true,
+            email: email,
+            lastUsed: "Just now",
+          };
+        }
+        return account;
+      }),
     )
 
     toast({

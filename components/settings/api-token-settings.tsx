@@ -159,7 +159,7 @@ export function ApiTokenSettings() {
             <CardHeader className="flex flex-row items-center justify-between">
               <div>
                 <CardTitle>API Tokens</CardTitle>
-                <CardDescription>Create and manage API tokens to access the Creavibe.pro API</CardDescription>
+                <CardDescription>Create and manage API tokens to access the CreaVibe API</CardDescription>
               </div>
               <Dialog open={isCreatingToken} onOpenChange={setIsCreatingToken}>
                 <DialogTrigger asChild>
@@ -174,7 +174,7 @@ export function ApiTokenSettings() {
                     <DialogDescription>
                       {newToken
                         ? "This token will only be shown once. Make sure to copy it now."
-                        : "Create a new API token to authenticate with the Creavibe.pro API."}
+                        : "Create a new API token to authenticate with the CreaVibe API."}
                     </DialogDescription>
                   </DialogHeader>
 
@@ -339,7 +339,7 @@ export function ApiTokenSettings() {
                   <Key className="h-8 w-8 mx-auto text-muted-foreground mb-2" />
                   <h3 className="font-medium text-lg mb-1">No API Tokens</h3>
                   <p className="text-muted-foreground mb-4">
-                    Create your first API token to get started with the Creavibe.pro API.
+                    Create your first API token to get started with the CreaVibe API.
                   </p>
                   <Button onClick={() => setIsCreatingToken(true)}>
                     <Plus className="mr-2 h-4 w-4" />
@@ -350,7 +350,7 @@ export function ApiTokenSettings() {
             </CardContent>
             <CardFooter>
               <p className="text-sm text-muted-foreground">
-                API tokens are used to authenticate with the Creavibe.pro API. Keep your tokens secure.
+                API tokens are used to authenticate with the CreaVibe API. Keep your tokens secure.
               </p>
             </CardFooter>
           </Card>
@@ -360,14 +360,14 @@ export function ApiTokenSettings() {
             <CardHeader>
               <CardTitle>API Documentation</CardTitle>
               <CardDescription>
-                Learn how to use the Creavibe.pro API to integrate with your applications
+                Learn how to use the CreaVibe API to integrate with your applications
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <h3 className="font-medium">Authentication</h3>
                 <p className="text-sm text-muted-foreground">
-                  To authenticate with the Creavibe.pro API, include your API token in the Authorization header:
+                  To authenticate with the CreaVibe API, include your API token in the Authorization header:
                 </p>
                 <div className="bg-muted p-3 rounded-md font-mono text-sm overflow-x-auto">
                   <code>Authorization: Bearer YOUR_API_TOKEN</code>
@@ -378,7 +378,7 @@ export function ApiTokenSettings() {
                 <h3 className="font-medium">Base URL</h3>
                 <p className="text-sm text-muted-foreground">All API requests should be made to:</p>
                 <div className="bg-muted p-3 rounded-md font-mono text-sm overflow-x-auto">
-                  <code>https://api.creavibe.pro/v1</code>
+                  <code>https://api.CreaVibe/v1</code>
                 </div>
               </div>
 

@@ -4,7 +4,7 @@ const milestones = [
   {
     year: 2020,
     title: "The Beginning",
-    description: "Creavibe.pro was founded with a vision to revolutionize content creation through AI.",
+    description: "CreaVibe was founded with a vision to revolutionize content creation through AI.",
   },
   {
     year: 2021,

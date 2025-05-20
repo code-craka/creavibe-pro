@@ -1,6 +1,6 @@
 # Deploying the Documentation Site to Vercel
 
-This guide will walk you through the process of deploying the Creavibe.pro documentation site to Vercel.
+This guide will walk you through the process of deploying the CreaVibe documentation site to Vercel.
 
 ## Prerequisites
 
@@ -45,7 +45,7 @@ Click "Deploy" and wait for the deployment to complete. Vercel will build and de
 ### 5. Custom Domain (Optional)
 
 1. Go to the "Domains" tab in your project settings
-2. Add your custom domain (e.g., "docs.creavibe.pro")
+2. Add your custom domain (e.g., "docs.CreaVibe")
 3. Follow the instructions to configure DNS settings
 
 ## Continuous Deployment

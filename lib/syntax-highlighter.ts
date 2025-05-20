@@ -1,27 +1,35 @@
 "use server"
 
-import type { Highlighter } from "shiki"
-import { getHighlighter } from "shiki/bundle/web"
+// Import from the correct bundle location to avoid type errors
+import * as shiki from 'shiki/bundle/web'
+import type { Highlighter } from 'shiki/bundle/web'
 
-let highlighter: Highlighter | null = null
+// Using a promise to ensure singleton initialization
+let highlighterPromise: Promise<Highlighter> | null = null
 
 export async function highlightCode(code: string, language = "typescript") {
-  // Initialize highlighter if not already done
-  if (!highlighter) {
-    highlighter = await getHighlighter({
-      themes: ["github-dark"],
-      langs: ["typescript", "javascript", "jsx", "tsx", "html", "css", "json", "markdown", "bash", "shell"],
-    })
-  }
-
   try {
-    // Fallback to typescript if language not supported
-    const lang = highlighter.getLoadedLanguages().includes(language as any) ? language : "typescript"
-
+    // Initialize the highlighter promise only once
+    if (!highlighterPromise) {
+      highlighterPromise = shiki.createHighlighter({
+        themes: ["github-dark"],
+        langs: ["typescript", "javascript", "tsx", "jsx", "html", "css", "json", "markdown", "bash"],
+      })
+    }
+    
+    // Await the highlighter
+    const highlighter = await highlighterPromise
+    
+    // Safely determine if language is supported
+    const supportedLanguages = highlighter.getLoadedLanguages()
+    const safeLanguage = typeof language === 'string' && 
+      supportedLanguages.includes(language) ? 
+      language : "typescript"
+    
     // Highlight the code
     const html = highlighter.codeToHtml(code, {
-      lang,
-      theme: "github-dark",
+      lang: safeLanguage,
+      theme: "github-dark"
     })
 
     return html

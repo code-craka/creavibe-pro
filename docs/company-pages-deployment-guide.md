@@ -1,13 +1,13 @@
-# Creavibe.pro Company Pages Deployment Guide
+# CreaVibe Company Pages Deployment Guide
 
-This guide provides step-by-step instructions for deploying the Creavibe.pro company pages (About, Careers, and Contact) to Vercel.
+This guide provides step-by-step instructions for deploying the CreaVibe company pages (About, Careers, and Contact) to Vercel.
 
 ## Prerequisites
 
 Before deploying, ensure you have:
 
 1. A GitHub account
-2. Access to the Creavibe.pro repository
+2. Access to the CreaVibe repository
 3. A Vercel account linked to your GitHub account
 
 ## Deployment Steps
@@ -39,7 +39,7 @@ If you haven't set up continuous deployment:
 1. Log in to your Vercel account
 2. Click "Import Project"
 3. Select "Import Git Repository"
-4. Choose the Creavibe.pro repository
+4. Choose the CreaVibe repository
 5. Configure the project settings:
    - Framework Preset: Next.js
    - Root Directory: ./
@@ -64,7 +64,7 @@ To use your custom domain:
 
 1. Go to your project in the Vercel dashboard
 2. Navigate to "Settings" > "Domains"
-3. Add your domain (e.g., creavibe.pro)
+3. Add your domain (e.g., CreaVibe)
 4. Follow the instructions to configure your DNS settings
 
 ### 5. Test Your Deployment
@@ -126,4 +126,4 @@ If images don't load:
 
 ## Need Help?
 
-If you encounter any issues during deployment, contact the development team at dev@creavibe.pro or open an issue in the GitHub repository.
+If you encounter any issues during deployment, contact the development team at dev@CreaVibe or open an issue in the GitHub repository.

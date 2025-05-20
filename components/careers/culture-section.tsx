@@ -10,7 +10,7 @@ export function CultureSection() {
         <div>
           <h3 className="text-2xl font-bold mb-4 text-purple-600">Work That Matters</h3>
           <p className="text-lg mb-4">
-            At Creavibe.pro, we're building tools that empower creators around the world. Our work directly impacts how
+            At CreaVibe, we're building tools that empower creators around the world. Our work directly impacts how
             people express themselves and collaborate in the digital age.
           </p>
           <p className="text-lg mb-4">
@@ -27,7 +27,7 @@ export function CultureSection() {
           <div className="aspect-video relative">
             <Image
               src="/placeholder-9wvjt.png"
-              alt="Creavibe.pro team collaborating"
+              alt="CreaVibe team collaborating"
               fill
               className="object-cover"
             />

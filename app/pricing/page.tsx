@@ -5,7 +5,7 @@ import PricingFAQ from "@/components/pricing/pricing-faq"
 import PricingCTA from "@/components/pricing/pricing-cta"
 
 export const metadata: Metadata = {
-  title: "Pricing | Creavibe.pro",
+  title: "Pricing | CreaVibe",
   description: "Choose the perfect plan for your content creation needs",
 }
 

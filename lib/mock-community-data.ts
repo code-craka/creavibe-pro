@@ -20,7 +20,7 @@ export const forumTopics = [
   {
     id: 3,
     title: "Integration with Webflow - step by step guide",
-    excerpt: "I've set up a seamless workflow between Creavibe and Webflow...",
+    excerpt: "I've set up a seamless workflow between CreaVibe and Webflow...",
     author: "WebflowWizard",
     replies: 15,
     lastReply: "3 days ago",
@@ -29,7 +29,7 @@ export const forumTopics = [
   {
     id: 4,
     title: "Team collaboration best practices",
-    excerpt: "Our marketing team has been using Creavibe for 3 months now...",
+    excerpt: "Our marketing team has been using CreaVibe for 3 months now...",
     author: "TeamLeadSarah",
     replies: 12,
     lastReply: "1 week ago",
@@ -49,7 +49,7 @@ export const forumTopics = [
 export const upcomingWebinars = [
   {
     id: 1,
-    title: "Getting Started with Creavibe.pro",
+    title: "Getting Started with CreaVibe",
     description: "Learn the basics and set up your first project in this beginner-friendly session.",
     date: "May 25, 2023",
     time: "11:00 AM - 12:00 PM PT",
@@ -73,8 +73,8 @@ export const upcomingWebinars = [
   },
   {
     id: 4,
-    title: "Integrating Creavibe with Your Tech Stack",
-    description: "Connect Creavibe.pro with your existing tools for a seamless workflow.",
+    title: "Integrating CreaVibe with Your Tech Stack",
+    description: "Connect CreaVibe with your existing tools for a seamless workflow.",
     date: "June 8, 2023",
     time: "2:00 PM - 3:00 PM PT",
     isFree: false,

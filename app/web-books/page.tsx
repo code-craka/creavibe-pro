@@ -86,10 +86,13 @@ export default function WebBooksPage() {
           avatar: "/abstract-profile.png",
         },
         chapterCount: 0,
+        chapters: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         isPublished: false,
         visibility: formData.get("visibility") as "public" | "private",
+        fontSize: 16,
+        fontFamily: "sans-serif",
       }
 
       setBooks((prev) => [newBook, ...prev])

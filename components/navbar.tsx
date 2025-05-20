@@ -4,12 +4,12 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { UserNav } from "@/components/user-nav"
 import { NotificationBell } from "@/components/notification-bell"
-import { Menu } from "lucide-react"
+import { Menu, Bell } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useState } from "react"
 import { useAuth } from "@/contexts/auth-context"
+import { AuthNav } from "@/components/auth/auth-nav"
 import Image from "next/image"
 
 export function Navbar() {
@@ -74,9 +74,15 @@ export function Navbar() {
           </SheetContent>
         </Sheet>
         <div className="flex items-center mr-4">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image src="/logo.png" alt="Creavibe.pro Logo" width={32} height={32} />
-            <span className="font-bold text-xl">Creavibe.pro</span>
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/logo.png" 
+              alt="CreaVibe Logo" 
+              width={140} 
+              height={40} 
+              className="h-10 w-auto"
+              priority
+            />
           </Link>
         </div>
         <nav className="hidden md:flex items-center space-x-6 text-sm font-medium flex-1">
@@ -94,21 +100,18 @@ export function Navbar() {
           ))}
         </nav>
         <div className="flex items-center space-x-2">
-          {user ? (
-            <>
-              <NotificationBell />
-              <UserNav />
-            </>
-          ) : (
-            <>
-              <Link href="/login">
-                <Button variant="ghost">Login</Button>
-              </Link>
-              <Link href="/signup">
-                <Button>Sign up</Button>
-              </Link>
-            </>
+          {user && (
+            <Link href="/notifications">
+              <Button variant="ghost" size="icon" className="relative">
+                <Bell className="h-5 w-5" />
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+                  0
+                </span>
+                <span className="sr-only">Notifications</span>
+              </Button>
+            </Link>
           )}
+          <AuthNav />
         </div>
       </div>
     </header>

@@ -15,8 +15,28 @@ import { Calendar } from "@/components/ui/calendar"
 import { cn } from "@/lib/utils"
 import { useToast } from "@/components/ui/use-toast"
 
+// Define interfaces for better type safety
+interface DataType {
+  id: string;
+  label: string;
+  count: number;
+}
+
+interface ExportFormat {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+}
+
+interface ExportRecord {
+  id: string;
+  date: Date;
+  format: string;
+  size: string;
+}
+
 // Mock data types for export
-const dataTypes = [
+const dataTypes: DataType[] = [
   { id: "projects", label: "Projects", count: 24 },
   { id: "templates", label: "Templates", count: 15 },
   { id: "content", label: "Content", count: 87 },
@@ -26,7 +46,7 @@ const dataTypes = [
 ]
 
 // Export format options
-const exportFormats = [
+const exportFormats: ExportFormat[] = [
   { id: "json", label: "JSON", icon: FileJson },
   { id: "csv", label: "CSV", icon: FileText },
   { id: "xlsx", label: "Excel (XLSX)", icon: FileSpreadsheet },
@@ -36,7 +56,10 @@ export function DataExportSettings() {
   const { toast } = useToast()
   const [selectedDataTypes, setSelectedDataTypes] = useState<string[]>([])
   const [exportFormat, setExportFormat] = useState("json")
-  const [dateRange, setDateRange] = useState<{ from: Date | undefined; to: Date | undefined }>({
+  // Local DateRange type that matches our state
+  type DateRange = { from: Date | undefined; to: Date | undefined }
+  
+  const [dateRange, setDateRange] = useState<DateRange>({
     from: undefined,
     to: undefined,
   })
@@ -186,7 +209,16 @@ export function DataExportSettings() {
                       mode="range"
                       defaultMonth={dateRange.from}
                       selected={dateRange}
-                      onSelect={setDateRange}
+                      onSelect={(range) => {
+                        if (range) {
+                          setDateRange({
+                            from: range.from,
+                            to: range.to,
+                          });
+                        } else {
+                          setDateRange({ from: undefined, to: undefined });
+                        }
+                      }}
                       numberOfMonths={2}
                     />
                   </PopoverContent>

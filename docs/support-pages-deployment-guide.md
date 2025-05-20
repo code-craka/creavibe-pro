@@ -1,4 +1,4 @@
-# Creavibe.pro Support Pages Deployment Guide
+# CreaVibe Support Pages Deployment Guide
 
 This guide will walk you through deploying the Help Center and Community Hub pages to Vercel.
 
@@ -37,7 +37,7 @@ git push -u origin main
 ## Step 3: Configure Custom Domain (Optional)
 
 1. In your Vercel project dashboard, go to "Settings" > "Domains"
-2. Add your custom domain (e.g., support.creavibe.pro)
+2. Add your custom domain (e.g., support.CreaVibe)
 3. Follow the instructions to configure DNS settings
 
 ## Step 4: Set Up Continuous Deployment

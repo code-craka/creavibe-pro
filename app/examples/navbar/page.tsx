@@ -56,7 +56,7 @@ export default function NavbarExample() {
       <main className="flex-1 container py-10">
         <h1 className="text-3xl font-bold mb-6">Navbar Example</h1>
         <p className="text-muted-foreground mb-4">
-          This page demonstrates the responsive navbar component for Creavibe.pro. The navbar includes branding,
+          This page demonstrates the responsive navbar component for CreaVibe. The navbar includes branding,
           navigation links, notification bell, and user avatar with dropdown menu.
         </p>
         <div className="flex flex-col gap-4">

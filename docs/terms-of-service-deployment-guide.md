@@ -1,6 +1,6 @@
 # Terms of Service Page Deployment Guide
 
-This guide provides instructions for deploying the Terms of Service page for Creavibe.pro to Vercel.
+This guide provides instructions for deploying the Terms of Service page for CreaVibe to Vercel.
 
 ## Prerequisites
 
@@ -9,13 +9,13 @@ Before deploying, ensure you have:
 1. A Vercel account
 2. Git installed on your local machine
 3. Node.js (v16 or later) and npm installed
-4. Access to the Creavibe.pro repository
+4. Access to the CreaVibe repository
 
 ## Local Setup and Testing
 
 1. Clone the repository:
    \`\`\`bash
-   git clone https://github.com/your-organization/creavibe-pro.git
+   git clone https://github.com/creavibe/creavibe-pro.git
    cd creavibe-pro
    \`\`\`
 
@@ -107,4 +107,4 @@ If you encounter issues during deployment:
 
 ## Support
 
-If you need assistance with deployment, contact the development team at dev@creavibe.pro.
+If you need assistance with deployment, contact the development team at dev@CreaVibe.

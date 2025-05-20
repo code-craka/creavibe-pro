@@ -15,7 +15,7 @@ Before deploying, ensure you have:
 ### 1. Clone the Repository
 
 \`\`\`bash
-git clone https://github.com/your-username/creavibe-pro.git
+git clone https://github.com/creavibe/creavibe-pro.git
 cd creavibe-pro
 \`\`\`
 
@@ -76,7 +76,7 @@ vercel
 
 1. In your Vercel dashboard, go to your project settings.
 2. Navigate to the "Domains" section.
-3. Add your custom domain (e.g., creavibe.pro).
+3. Add your custom domain (e.g., CreaVibe).
 4. Follow the instructions to configure DNS settings.
 
 ## Post-Deployment Checks

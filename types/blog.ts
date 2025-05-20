@@ -2,6 +2,7 @@ export interface Author {
   id: string
   name: string
   avatar: string
+  role?: string // Author's role or position (optional)
 }
 
 export interface BlogPost {
@@ -12,6 +13,7 @@ export interface BlogPost {
   content: string
   coverImage: string
   publishedAt: string
+  updatedAt?: string // Date when the post was last updated (optional)
   author: Author
   tags: string[]
   category: string

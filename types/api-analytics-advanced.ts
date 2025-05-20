@@ -6,6 +6,16 @@ export interface ApiTokenUsage {
   successRate: number
   avgLatency: number
   trend: number
+  // For error TS2322 in server-api-analytics-service.ts
+  totalRequests: number
+  successfulRequests: number
+  failedRequests: number
+  averageResponseTime: number
+  totalDataTransferred: number
+  requestsByEndpoint?: Record<string, number>
+  requestsByStatusCode?: Record<string, number>
+  requestsByMethod?: Record<string, number>
+  requestsOverTime?: Array<any>
 }
 
 export interface ApiTokenPrediction {
@@ -113,4 +123,72 @@ export interface AnomalySettings {
   autoThreshold: boolean
   notificationsEnabled: boolean
   customThresholds: AnomalyThreshold
+}
+
+// Added missing types needed for components
+export interface IndustryBenchmark {
+  id: string
+  industry: string
+  metric: string
+  value: number
+  percentile: number
+  trend: number
+  insight: string
+}
+
+export interface CompetitorComparison {
+  id: string
+  competitor: string
+  metrics: {
+    name: string
+    yourValue: number
+    theirValue: number
+    difference: number
+    insight: string
+  }[]
+  overallScore: number
+  strengths: string[]
+  weaknesses: string[]
+}
+
+export interface ApiUsageDataPoint {
+  date: string
+  value: number
+  type: 'historical' | 'forecast'
+}
+
+export interface ApiUsageForecast {
+  dataPoints: ApiUsageDataPoint[]
+  accuracy: number
+  trend: 'increasing' | 'decreasing' | 'stable'
+  insights: string[]
+}
+
+export interface ApiUsageTimeframe {
+  id: string
+  label: string
+  days: number
+  default?: boolean
+}
+
+export interface ScenarioSimulation {
+  id: string
+  name: string
+  description: string
+  parameters: {
+    name: string
+    value: number
+    min: number
+    max: number
+    step: number
+  }[]
+  results: {
+    metric: string
+    baseline: number
+    simulated: number
+    change: number
+    impact: 'positive' | 'negative' | 'neutral'
+  }[]
+  recommendations: string[]
+  createdAt: string
 }

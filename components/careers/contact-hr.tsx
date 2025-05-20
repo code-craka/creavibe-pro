@@ -8,10 +8,10 @@ export function ContactHR() {
       <h2 className="text-2xl font-bold mb-4">Don't See the Right Role?</h2>
       <p className="text-lg mb-6 max-w-2xl mx-auto">
         We're always looking for talented individuals to join our team. Send us your resume and let us know how you can
-        contribute to Creavibe.pro.
+        contribute to CreaVibe.
       </p>
       <Button asChild size="lg">
-        <Link href="mailto:careers@creavibe.pro">
+        <Link href="mailto:careers@CreaVibe">
           <Mail className="mr-2 h-5 w-5" />
           Contact HR Team
         </Link>

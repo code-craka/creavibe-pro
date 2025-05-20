@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 const teamQuotes = [
   {
     quote:
-      "Working at Creavibe.pro has been the most rewarding experience of my career. I get to solve challenging problems while working with an amazing team.",
+      "Working at CreaVibe has been the most rewarding experience of my career. I get to solve challenging problems while working with an amazing team.",
     name: "Alex Chen",
     role: "Senior Engineer",
     image: "/smiling-professional-woman-headshot.png",
@@ -18,7 +18,7 @@ const teamQuotes = [
   },
   {
     quote:
-      "The remote-first approach at Creavibe.pro has allowed me to work with talented people from around the world while maintaining the perfect work-life balance.",
+      "The remote-first approach at CreaVibe has allowed me to work with talented people from around the world while maintaining the perfect work-life balance.",
     name: "Sophia Rodriguez",
     role: "Marketing Manager",
     image: "/latina-professional-headshot.png",
@@ -28,7 +28,7 @@ const teamQuotes = [
 export function TeamPhotos() {
   return (
     <section className="mb-16">
-      <h2 className="text-3xl font-bold mb-8 text-center">Life at Creavibe.pro</h2>
+      <h2 className="text-3xl font-bold mb-8 text-center">Life at CreaVibe</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <Card className="overflow-hidden shadow-lg">

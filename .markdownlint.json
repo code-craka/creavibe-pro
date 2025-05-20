@@ -1,0 +1,32 @@
+{
+  "default": true,
+  "MD033": {
+    "allowed_elements": [
+      "Button",
+      "PlusIcon",
+      "Card",
+      "CardHeader",
+      "CardTitle",
+      "CardDescription",
+      "CardContent",
+      "CardFooter",
+      "Input",
+      "Tabs",
+      "TabsList",
+      "TabsTrigger",
+      "TabsContent",
+      "Navbar",
+      "DashboardNav",
+      "Footer",
+      "QuickActions",
+      "RecentProjects",
+      "AIGenerator",
+      "ProjectsHeader",
+      "ProjectsList",
+      "WebBookRenderer",
+      "ContentRenderer",
+      "UserNav",
+      "SupabaseWarning"
+    ]
+  }
+}

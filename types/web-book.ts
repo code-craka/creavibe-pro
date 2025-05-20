@@ -13,6 +13,25 @@ export interface WebBook {
   updatedAt: string
   isPublished: boolean
   visibility: "public" | "private" | "restricted"
+  // Added missing properties used in components
+  chapters: WebBookChapter[]
+  fontSize?: number
+  fontFamily?: string
+}
+
+export interface WebBookChapter {
+  id: string
+  title: string
+  content: string
+  order: number
+  sections?: WebBookSection[]
+}
+
+export interface WebBookSection {
+  id: string
+  title: string
+  content: string
+  order: number
 }
 
 export interface WebBookFormValues {

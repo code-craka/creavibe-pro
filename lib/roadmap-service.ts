@@ -67,7 +67,7 @@ const mockRoadmapItems: RoadmapItem[] = [
   {
     id: uuidv4(),
     title: "Social Media Integration",
-    description: "Direct publishing to popular social media platforms from within Creavibe.pro.",
+    description: "Direct publishing to popular social media platforms from within CreaVibe.",
     status: "completed",
     tags: ["Social Media", "Integration", "Publishing"],
     createdAt: new Date(Date.now() - 60 * 24 * 60 * 60 * 1000).toISOString(),

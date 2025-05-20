@@ -14,8 +14,9 @@ const nextConfig = {
   experimental: {
     // Disable static optimization for MDX pages to ensure server-side rendering
     mdxRs: false,
-    serverExternalPackages: ["shiki"],
   },
+  // This is the correct location for serverExternalPackages in Next.js 15
+  serverExternalPackages: ["shiki"],
   // Configure webpack to handle MDX files
   webpack: (config) => {
     // Add MDX file handling

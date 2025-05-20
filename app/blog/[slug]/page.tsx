@@ -19,20 +19,20 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Post Not Found | Creavibe.pro Blog",
+      title: "Post Not Found | CreaVibe Blog",
       description: "The requested blog post could not be found.",
     }
   }
 
   return {
-    title: `${post.title} | Creavibe.pro Blog`,
+    title: `${post.title} | CreaVibe Blog`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: "article",
       publishedTime: post.publishedAt,
-      modifiedTime: post.updatedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
       authors: [post.author.name],
       images: [post.coverImage],
     },
@@ -84,7 +84,7 @@ export default async function BlogPostPage({
             </Avatar>
             <div>
               <div className="font-medium">{post.author.name}</div>
-              <div className="text-sm text-muted-foreground">{post.author.role}</div>
+              <div className="text-sm text-muted-foreground">{post.author.role || "Author"}</div>
             </div>
           </div>
 

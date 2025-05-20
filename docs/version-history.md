@@ -1,6 +1,6 @@
 # Version History Component Documentation
 
-The Version History component provides a clean, organized interface for tracking and managing document revisions in the Creavibe.pro SaaS application.
+The Version History component provides a clean, organized interface for tracking and managing document revisions in the CreaVibe SaaS application.
 
 ## Features
 

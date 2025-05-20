@@ -10,7 +10,7 @@ export default function PricingCTA() {
               Ready to Transform Your Content Creation?
             </h2>
             <p className="mx-auto max-w-[700px] md:text-xl">
-              Join thousands of creators and marketing teams who are already using Creavibe.pro to produce exceptional
+              Join thousands of creators and marketing teams who are already using CreaVibe to produce exceptional
               content.
             </p>
           </div>

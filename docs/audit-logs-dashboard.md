@@ -1,6 +1,6 @@
 # Audit Logs Dashboard Documentation
 
-The Audit Logs Dashboard is a comprehensive component for the Creavibe.pro SaaS application that allows administrators to monitor user actions and system events. It provides a clear and efficient way to view, filter, and search audit logs.
+The Audit Logs Dashboard is a comprehensive component for the CreaVibe SaaS application that allows administrators to monitor user actions and system events. It provides a clear and efficient way to view, filter, and search audit logs.
 
 ## Features
 

@@ -74,6 +74,8 @@ import {
   createTokenThreshold,
   deleteTokenThreshold,
 } from "@/lib/api-analytics-service"
+import { DailyUsageData } from '@/lib/api-analytics-service';
+import type { ApiUsageFilters as ServiceApiUsageFilters } from '@/lib/api-analytics-service';
 
 // Chart colors
 const CHART_COLORS = {
@@ -107,10 +109,10 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
   const [requestLogs, setRequestLogs] = useState<ApiRequestLog[]>([])
   const [totalLogs, setTotalLogs] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
-  const [pageSize, setPageSize] = useState(10)
+  const [pageSize] = useState(10)
   const [thresholds, setThresholds] = useState<ApiUsageThreshold[]>([])
   const [isCreatingThreshold, setIsCreatingThreshold] = useState(false)
-  const [dailyUsageData, setDailyUsageData] = useState<any[]>([])
+  const [dailyUsageData, setDailyUsageData] = useState<DailyUsageData[]>([])
   const [filters, setFilters] = useState<ApiUsageFilters>({
     dateRange: {
       from: subDays(new Date(), 7),
@@ -147,7 +149,14 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
         setDailyUsageData(dailyData)
 
         // Load initial request logs
-        const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize)
+        const transformedFilters: Partial<ServiceApiUsageFilters> = {
+          ...filters,
+          dateRange: {
+            from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+            to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+          },
+        };
+        const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize, transformedFilters)
         setRequestLogs(logs)
         setTotalLogs(total)
 
@@ -167,7 +176,7 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
     }
 
     loadTokenUsage()
-  }, [token.id, toast, currentPage, pageSize])
+  }, [token.id, toast, currentPage, pageSize, filters])
 
   // Handle page change
   const handlePageChange = async (page: number) => {
@@ -175,7 +184,14 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
     setIsLoading(true)
 
     try {
-      const { logs, total } = await fetchTokenRequestLogs(token.id, page, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, page, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
     } catch (error) {
@@ -204,7 +220,14 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
       setDailyUsageData(dailyData)
 
       // Refresh request logs
-      const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
 
@@ -233,7 +256,14 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
     setIsLoading(true)
 
     try {
-      const { logs, total } = await fetchTokenRequestLogs(token.id, 1, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, 1, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
       setCurrentPage(1)
@@ -615,7 +645,7 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
                               onSelect={(date) =>
                                 setFilters({
                                   ...filters,
-                                  dateRange: { ...filters.dateRange, from: date },
+                                  dateRange: { ...filters.dateRange, from: date === undefined ? null : date },
                                 })
                               }
                               initialFocus
@@ -637,7 +667,7 @@ export function ApiTokenAnalytics({ token }: ApiTokenAnalyticsProps) {
                               onSelect={(date) =>
                                 setFilters({
                                   ...filters,
-                                  dateRange: { ...filters.dateRange, to: date },
+                                  dateRange: { ...filters.dateRange, to: date === undefined ? null : date },
                                 })
                               }
                               initialFocus

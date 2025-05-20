@@ -15,13 +15,13 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
 
   if (!doc) {
     return {
-      title: "Not Found | Creavibe.pro Documentation",
+      title: "Not Found | CreaVibe Documentation",
       description: "The requested documentation page was not found.",
     }
   }
 
   return {
-    title: `${doc.title} | Creavibe.pro Documentation`,
+    title: `${doc.title} | CreaVibe Documentation`,
     description: doc.description,
   }
 }

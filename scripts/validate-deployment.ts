@@ -17,7 +17,9 @@ function validatePackageJson() {
       JSON.parse(packageJsonContent)
       console.log("✅ package.json is valid JSON")
     } catch (error) {
-      console.error("❌ package.json is not valid JSON:", error.message)
+      // Add proper type guard for unknown error
+      const errorMessage = error instanceof Error ? error.message : 'Unknown parsing error';
+      console.error("❌ package.json is not valid JSON:", errorMessage)
       process.exit(1)
     }
 
@@ -35,7 +37,8 @@ function validatePackageJson() {
 
     console.log("✅ All required dependencies are present")
   } catch (error) {
-    console.error("❌ Error validating package.json:", error.message)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Error validating package.json:", errorMessage)
     process.exit(1)
   }
 }
@@ -51,11 +54,14 @@ function validateTsConfig() {
       JSON.parse(tsConfigContent)
       console.log("✅ tsconfig.json is valid JSON")
     } catch (error) {
-      console.error("❌ tsconfig.json is not valid JSON:", error.message)
+      // Add proper type guard for unknown error
+      const errorMessage = error instanceof Error ? error.message : 'Unknown parsing error';
+      console.error("❌ tsconfig.json is not valid JSON:", errorMessage)
       process.exit(1)
     }
   } catch (error) {
-    console.error("❌ Error validating tsconfig.json:", error.message)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+    console.error("❌ Error validating tsconfig.json:", errorMessage)
     process.exit(1)
   }
 }

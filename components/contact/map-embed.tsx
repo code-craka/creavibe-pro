@@ -9,7 +9,7 @@ export function MapEmbed() {
         allowFullScreen={false}
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
-        title="Creavibe.pro Office Location"
+        title="CreaVibe Office Location"
       ></iframe>
     </div>
   )

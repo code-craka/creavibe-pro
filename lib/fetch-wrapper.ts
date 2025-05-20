@@ -2,7 +2,7 @@
  * A wrapper around the fetch API that handles common error cases
  * and provides better error messages
  */
-export async function fetchWithErrorHandling(url: string, options?: RequestInit) {
+export async function fetchWithErrorHandling<T>(url: string, options?: RequestInit): Promise<T | null> {
   try {
     const response = await fetch(url, options)
 
@@ -20,11 +20,16 @@ export async function fetchWithErrorHandling(url: string, options?: RequestInit)
 
     // Safely parse JSON
     try {
-      return JSON.parse(text)
+      return JSON.parse(text) as T
     } catch (parseError) {
       console.error("JSON Parse Error:", parseError)
       console.error("Response text:", text)
-      throw new Error(`Failed to parse JSON response: ${parseError.message}`)
+      // Add proper type guard for unknown error
+      if (parseError instanceof Error) {
+        throw new Error(`Failed to parse JSON response: ${parseError.message}`)
+      } else {
+        throw new Error(`Failed to parse JSON response: Unknown parsing error`)
+      }
     }
   } catch (error) {
     console.error("Fetch Error:", error)
@@ -36,14 +41,19 @@ export async function fetchWithErrorHandling(url: string, options?: RequestInit)
  * Helper function to safely stringify JSON with error handling
  */
 export function safeJsonStringify(
-  data: any,
-  replacer?: (key: string, value: any) => any,
+  data: unknown,
+  replacer?: (key: string, value: unknown) => unknown | undefined,
   space?: string | number,
 ): string {
   try {
     return JSON.stringify(data, replacer, space)
   } catch (error) {
     console.error("JSON Stringify Error:", error)
-    throw new Error(`Failed to stringify JSON data: ${error.message}`)
+    // Add proper type guard for unknown error
+    if (error instanceof Error) {
+      throw new Error(`Failed to stringify JSON data: ${error.message}`)
+    } else {
+      throw new Error(`Failed to stringify JSON data: Unknown error occurred`)
+    }
   }
 }

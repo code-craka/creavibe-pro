@@ -3,8 +3,8 @@ import { DocContent } from "@/components/docs/doc-content"
 import { getDocBySlug } from "@/lib/docs"
 
 export const metadata: Metadata = {
-  title: "Getting Started | Creavibe.pro Documentation",
-  description: "Get started with Creavibe.pro API and SDK",
+  title: "Getting Started | CreaVibe Documentation",
+  description: "Get started with CreaVibe API and SDK",
 }
 
 export default async function DocsPage() {

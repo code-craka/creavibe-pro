@@ -1,6 +1,6 @@
 # Advanced User Settings Page
 
-The Advanced User Settings page provides a comprehensive interface for users to manage their account settings, customize the application appearance, connect with external services, export data, and manage API tokens within the Creavibe.pro application.
+The Advanced User Settings page provides a comprehensive interface for users to manage their account settings, customize the application appearance, connect with external services, export data, and manage API tokens within the CreaVibe application.
 
 ## Features
 

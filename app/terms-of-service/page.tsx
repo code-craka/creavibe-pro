@@ -3,8 +3,8 @@ import { Breadcrumb } from "@/components/breadcrumb"
 import { TermsOfServiceContent } from "@/components/terms-of-service/terms-of-service-content"
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Creavibe.pro",
-  description: "Terms of Service for Creavibe.pro - AI-powered content creation and real-time collaboration platform.",
+  title: "Terms of Service | CreaVibe",
+  description: "Terms of Service for CreaVibe - AI-powered content creation and real-time collaboration platform.",
 }
 
 export default function TermsOfServicePage() {

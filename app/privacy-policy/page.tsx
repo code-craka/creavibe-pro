@@ -3,9 +3,9 @@ import PrivacyPolicyContent from "@/components/privacy-policy/privacy-policy-con
 import { Breadcrumb } from "@/components/breadcrumb"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Creavibe.pro",
+  title: "Privacy Policy | CreaVibe",
   description:
-    "Learn how Creavibe.pro collects, uses, and protects your personal information in compliance with GDPR regulations.",
+    "Learn how CreaVibe collects, uses, and protects your personal information in compliance with GDPR regulations.",
 }
 
 export default function PrivacyPolicyPage() {

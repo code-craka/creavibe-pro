@@ -5,8 +5,8 @@ import { IntegrationsSearch } from "@/components/integrations/integrations-searc
 import { IntegrationsFilters } from "@/components/integrations/integrations-filters"
 
 export const metadata: Metadata = {
-  title: "Integrations | Creavibe.pro",
-  description: "Connect Creavibe.pro with your favorite tools and services",
+  title: "Integrations | CreaVibe",
+  description: "Connect CreaVibe with your favorite tools and services",
 }
 
 export default function IntegrationsPage() {

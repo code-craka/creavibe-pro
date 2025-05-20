@@ -14,6 +14,11 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_AN
 // Create the Supabase client
 export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
 
+// For browser-side usage (client components)
+export const createBrowserClient = () => {
+  return createClient<Database>(supabaseUrl, supabaseAnonKey)
+}
+
 // Export the URL and key for use in other parts of the application
 export const supabaseConfig = {
   url: supabaseUrl,

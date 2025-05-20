@@ -2,7 +2,7 @@ export const mockSearchResults = [
   {
     id: 1,
     title: "How to create your first AI-generated blog post",
-    content: "Learn how to use Creavibe.pro's AI tools to create engaging blog content in minutes.",
+    content: "Learn how to use CreaVibe's AI tools to create engaging blog content in minutes.",
     url: "/help-center#blog-post",
   },
   {
@@ -14,7 +14,7 @@ export const mockSearchResults = [
   {
     id: 3,
     title: "Integrating with your CMS",
-    content: "Connect Creavibe.pro with WordPress, Webflow, Shopify, and other popular CMS platforms.",
+    content: "Connect CreaVibe with WordPress, Webflow, Shopify, and other popular CMS platforms.",
     url: "/help-center#cms-integration",
   },
   {
@@ -35,17 +35,17 @@ export const faqCategories = [
   {
     id: "getting-started",
     name: "Getting Started",
-    description: "Learn the basics of using Creavibe.pro",
+    description: "Learn the basics of using CreaVibe",
     faqs: [
       {
         question: "How do I create my first project?",
         answer:
-          "To create your first project, log in to your Creavibe.pro account and click the 'New Project' button in the dashboard. Choose a project type (blog post, social media, email, etc.), give it a name, and click 'Create'. You'll be taken to the editor where you can start creating content.",
+          "To create your first project, log in to your CreaVibe account and click the 'New Project' button in the dashboard. Choose a project type (blog post, social media, email, etc.), give it a name, and click 'Create'. You'll be taken to the editor where you can start creating content.",
       },
       {
         question: "Can I invite team members to collaborate?",
         answer:
-          "Yes! Creavibe.pro is designed for collaboration. Go to your project settings, click on 'Team Members', and enter the email addresses of the people you want to invite. You can set different permission levels for each team member (Admin, Editor, Viewer).",
+          "Yes! CreaVibe is designed for collaboration. Go to your project settings, click on 'Team Members', and enter the email addresses of the people you want to invite. You can set different permission levels for each team member (Admin, Editor, Viewer).",
       },
       {
         question: "How does the AI content generation work?",
@@ -55,7 +55,7 @@ export const faqCategories = [
       {
         question: "What file formats can I export my content to?",
         answer:
-          "Creavibe.pro supports exporting to multiple formats including PDF, DOCX, HTML, Markdown, and plain text. For images, we support PNG, JPG, and SVG formats. You can also directly publish to integrated platforms like WordPress, Medium, or social media channels.",
+          "CreaVibe supports exporting to multiple formats including PDF, DOCX, HTML, Markdown, and plain text. For images, we support PNG, JPG, and SVG formats. You can also directly publish to integrated platforms like WordPress, Medium, or social media channels.",
       },
       {
         question: "Is there a limit to how many projects I can create?",
@@ -104,12 +104,12 @@ export const faqCategories = [
       {
         question: "What browsers are supported?",
         answer:
-          "Creavibe.pro works best on modern browsers including Chrome, Firefox, Safari, and Edge. We recommend keeping your browser updated to the latest version for optimal performance. Internet Explorer is not supported.",
+          "CreaVibe works best on modern browsers including Chrome, Firefox, Safari, and Edge. We recommend keeping your browser updated to the latest version for optimal performance. Internet Explorer is not supported.",
       },
       {
         question: "Is there a desktop or mobile app available?",
         answer:
-          "Currently, Creavibe.pro is a web-based platform optimized for desktop and mobile browsers. We're working on native mobile apps for iOS and Android, which will be released in the near future. Stay tuned for updates!",
+          "Currently, CreaVibe is a web-based platform optimized for desktop and mobile browsers. We're working on native mobile apps for iOS and Android, which will be released in the near future. Stay tuned for updates!",
       },
       {
         question: "How do I clear the cache if I'm experiencing issues?",
@@ -119,7 +119,7 @@ export const faqCategories = [
       {
         question: "What are the system requirements?",
         answer:
-          "Creavibe.pro is a cloud-based platform that runs in your web browser, so there are no specific hardware requirements. However, we recommend at least 4GB of RAM and a stable internet connection for the best experience.",
+          "CreaVibe is a cloud-based platform that runs in your web browser, so there are no specific hardware requirements. However, we recommend at least 4GB of RAM and a stable internet connection for the best experience.",
       },
       {
         question: "How secure is my data?",

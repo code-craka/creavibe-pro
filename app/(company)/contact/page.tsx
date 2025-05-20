@@ -4,8 +4,8 @@ import { ContactSidebar } from "@/components/contact/contact-sidebar"
 import { MapEmbed } from "@/components/contact/map-embed"
 
 export const metadata: Metadata = {
-  title: "Contact Us | Creavibe.pro",
-  description: "Get in touch with the Creavibe.pro team for support, inquiries, or partnerships.",
+  title: "Contact Us | CreaVibe",
+  description: "Get in touch with the CreaVibe team for support, inquiries, or partnerships.",
 }
 
 export default function ContactPage() {

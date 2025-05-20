@@ -36,6 +36,7 @@ import type {
   ApiUsageAnomaly,
   ApiUsageScenario,
 } from "@/types/api-analytics"
+import type { ApiUsageFilters as ServiceApiUsageFilters } from "@/lib/api-analytics-service" // Added import
 import {
   fetchTokenRequestLogs,
   fetchTokenThresholds,
@@ -306,7 +307,14 @@ export function ApiTokenAdvancedAnalytics({ token }: ApiTokenAdvancedAnalyticsPr
     setIsLoading(true)
 
     try {
-      const { logs, total } = await fetchTokenRequestLogs(token.id, page, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, page, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
     } catch (error) {
@@ -335,7 +343,14 @@ export function ApiTokenAdvancedAnalytics({ token }: ApiTokenAdvancedAnalyticsPr
       setDailyUsageData(dailyData)
 
       // Refresh request logs
-      const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, currentPage, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
 
@@ -380,7 +395,14 @@ export function ApiTokenAdvancedAnalytics({ token }: ApiTokenAdvancedAnalyticsPr
     setIsLoading(true)
 
     try {
-      const { logs, total } = await fetchTokenRequestLogs(token.id, 1, pageSize, filters)
+      const transformedFilters: Partial<ServiceApiUsageFilters> = {
+        ...filters,
+        dateRange: {
+          from: filters.dateRange.from === null ? undefined : filters.dateRange.from,
+          to: filters.dateRange.to === null ? undefined : filters.dateRange.to,
+        },
+      };
+      const { logs, total } = await fetchTokenRequestLogs(token.id, 1, pageSize, transformedFilters)
       setRequestLogs(logs)
       setTotalLogs(total)
       setCurrentPage(1)
@@ -587,7 +609,7 @@ export function ApiTokenAdvancedAnalytics({ token }: ApiTokenAdvancedAnalyticsPr
   // Handle delete scenario
   const handleDeleteScenario = async (scenarioId: string) => {
     try {
-      await deleteScenario(scenarioId)
+      await deleteScenario()
       setScenarios((prev) => prev.filter((s) => s.id !== scenarioId))
 
       toast({

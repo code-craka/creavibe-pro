@@ -6,8 +6,8 @@ import { TeamPhotos } from "@/components/careers/team-photos"
 import { ContactHR } from "@/components/careers/contact-hr"
 
 export const metadata: Metadata = {
-  title: "Careers | Creavibe.pro",
-  description: "Join our team at Creavibe.pro and help shape the future of AI-powered content creation.",
+  title: "Careers | CreaVibe",
+  description: "Join our team at CreaVibe and help shape the future of AI-powered content creation.",
 }
 
 export default function CareersPage() {

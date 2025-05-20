@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import {
@@ -54,9 +55,15 @@ export function DashboardHeader({ displayName, avatarUrl, currentTime, onSignOut
     <header className="sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-primary" />
-            <span className="hidden font-bold md:inline-block">Creavibe.pro</span>
+          <Link href="/" className="flex items-center">
+            <Image 
+              src="/logo.png" 
+              alt="CreaVibe Logo" 
+              width={140} 
+              height={40} 
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -83,9 +90,15 @@ export function DashboardHeader({ displayName, avatarUrl, currentTime, onSignOut
             </SheetTrigger>
             <SheetContent side="left" className="w-[240px] sm:w-[300px]">
               <div className="flex flex-col gap-6 py-4">
-                <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-                  <Sparkles className="h-6 w-6 text-primary" />
-                  <span className="font-bold">Creavibe.pro</span>
+                <Link href="/" className="flex items-center py-2" onClick={() => setOpen(false)}>
+                  <Image 
+                    src="/logo.png" 
+                    alt="CreaVibe Logo" 
+                    width={140} 
+                    height={40} 
+                    className="h-8 w-auto"
+                    priority
+                  />
                 </Link>
                 <nav className="flex flex-col gap-4">
                   {navItems.map((item) => (

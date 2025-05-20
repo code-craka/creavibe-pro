@@ -3,17 +3,21 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Eye, EyeOff, Key, Shield, Smartphone } from "lucide-react"
+import { Eye, EyeOff, Key, Shield, Smartphone, Loader2 } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "@/hooks/use-toast"
+import { useAuth } from "@/contexts/auth-context"
+import { authService } from "@/lib/auth-service"
+import { AccountDeletion } from "@/components/settings/account-deletion"
 
 export function SecuritySettings() {
   const { toast } = useToast()
+  const { user } = useAuth()
   const [currentPassword, setCurrentPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
@@ -26,6 +30,15 @@ export function SecuritySettings() {
   const handlePasswordChange = async (e: React.FormEvent) => {
     e.preventDefault()
 
+    if (!user || !user.email) {
+      toast({
+        title: "Authentication error",
+        description: "You must be logged in to change your password.",
+        variant: "destructive",
+      })
+      return
+    }
+
     if (newPassword !== confirmPassword) {
       toast({
         title: "Passwords don't match",
@@ -35,21 +48,50 @@ export function SecuritySettings() {
       return
     }
 
+    if (newPassword.length < 8) {
+      toast({
+        title: "Password too short",
+        description: "New password must be at least 8 characters long.",
+        variant: "destructive",
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      // First verify the current password by attempting to sign in
+      const { error: signInError } = await authService.signIn(user.email, currentPassword)
+      
+      if (signInError) {
+        throw new Error("Current password is incorrect")
+      }
+      
+      // Then update the password
+      const { error: updateError } = await authService.updatePassword(newPassword)
+      
+      if (updateError) {
+        throw updateError
+      }
 
-    toast({
-      title: "Password updated",
-      description: "Your password has been changed successfully.",
-    })
+      toast({
+        title: "Password updated",
+        description: "Your password has been changed successfully.",
+      })
 
-    // Reset form
-    setCurrentPassword("")
-    setNewPassword("")
-    setConfirmPassword("")
-    setIsSubmitting(false)
+      // Reset form
+      setCurrentPassword("")
+      setNewPassword("")
+      setConfirmPassword("")
+    } catch (error: any) {
+      toast({
+        title: "Error updating password",
+        description: error.message || "Failed to update password. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleTwoFactorToggle = async (checked: boolean) => {
@@ -247,6 +289,11 @@ export function SecuritySettings() {
           </Button>
         </CardFooter>
       </Card>
+
+      {/* Account Deletion */}
+      <div className="mt-10">
+        <AccountDeletion />
+      </div>
     </div>
   )
 }

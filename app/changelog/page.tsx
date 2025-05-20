@@ -3,8 +3,8 @@ import ChangelogHeader from "@/components/changelog/changelog-header"
 import ChangelogContent from "@/components/changelog/changelog-content"
 
 export const metadata: Metadata = {
-  title: "Changelog | Creavibe.pro",
-  description: "Stay up to date with the latest features, improvements, and bug fixes for Creavibe.pro.",
+  title: "Changelog | CreaVibe",
+  description: "Stay up to date with the latest features, improvements, and bug fixes for CreaVibe.",
 }
 
 export default function ChangelogPage() {

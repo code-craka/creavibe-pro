@@ -5,7 +5,7 @@ import { BlogGrid } from "@/components/blog/blog-grid"
 import { BlogSkeleton } from "@/components/blog/blog-skeleton"
 
 export const metadata: Metadata = {
-  title: "Blog | Creavibe.pro",
+  title: "Blog | CreaVibe",
   description: "Explore the latest insights, tutorials, and updates on AI-powered content creation and collaboration.",
 }
 

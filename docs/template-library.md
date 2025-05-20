@@ -1,6 +1,6 @@
 # Template Library Component Documentation
 
-The Template Library is a comprehensive component for the Creavibe.pro SaaS application that allows users to browse, search, and use content templates. It provides a visually appealing grid layout with filtering and search capabilities.
+The Template Library is a comprehensive component for the CreaVibe SaaS application that allows users to browse, search, and use content templates. It provides a visually appealing grid layout with filtering and search capabilities.
 
 ## Features
 

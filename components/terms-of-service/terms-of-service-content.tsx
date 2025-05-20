@@ -10,7 +10,7 @@ export function TermsOfServiceContent() {
       <section id="introduction" className="space-y-4">
         <h2 className="text-2xl font-bold tracking-tight">1. Introduction</h2>
         <p>
-          Welcome to Creavibe.pro. These Terms of Service ("Terms") govern your access to and use of Creavibe.pro's
+          Welcome to CreaVibe. These Terms of Service ("Terms") govern your access to and use of CreaVibe's
           website, services, and applications (collectively, the "Services"). By accessing or using our Services, you
           agree to be bound by these Terms and our Privacy Policy.
         </p>
@@ -22,7 +22,7 @@ export function TermsOfServiceContent() {
         <Alert>
           <Info className="h-4 w-4" />
           <AlertDescription>
-            These Terms constitute a legally binding agreement between you and Creavibe.pro, operated by TechSci, Inc.
+            These Terms constitute a legally binding agreement between you and CreaVibe, operated by TechSci, Inc.
           </AlertDescription>
         </Alert>
       </section>
@@ -40,7 +40,7 @@ export function TermsOfServiceContent() {
           <li>
             Maintain the security of your account by protecting your password and restricting access to your account
           </li>
-          <li>Notify Creavibe.pro immediately of any unauthorized access to or use of your account</li>
+          <li>Notify CreaVibe immediately of any unauthorized access to or use of your account</li>
           <li>
             Take responsibility for all activities that occur under your account and accept all risks of unauthorized
             access
@@ -81,12 +81,12 @@ export function TermsOfServiceContent() {
                   mail," "chain letter," "spam," or any other similar solicitation
                 </li>
                 <li>
-                  To impersonate or attempt to impersonate Creavibe.pro, a Creavibe.pro employee, another user, or any
+                  To impersonate or attempt to impersonate CreaVibe, a CreaVibe employee, another user, or any
                   other person or entity
                 </li>
                 <li>
                   To engage in any other conduct that restricts or inhibits anyone's use or enjoyment of the Services,
-                  or which may harm Creavibe.pro or users of the Services
+                  or which may harm CreaVibe or users of the Services
                 </li>
               </ul>
             </AccordionContent>
@@ -133,7 +133,7 @@ export function TermsOfServiceContent() {
         <Card>
           <CardHeader>
             <CardTitle>API Key Usage</CardTitle>
-            <CardDescription>Guidelines for using Creavibe.pro API keys</CardDescription>
+            <CardDescription>Guidelines for using CreaVibe API keys</CardDescription>
           </CardHeader>
           <CardContent>
             <ul className="list-disc pl-6 space-y-2">
@@ -160,7 +160,7 @@ export function TermsOfServiceContent() {
         <p>
           The Services and their entire contents, features, and functionality (including but not limited to all
           information, software, text, displays, images, video, and audio, and the design, selection, and arrangement
-          thereof) are owned by Creavibe.pro, its licensors, or other providers of such material and are protected by
+          thereof) are owned by CreaVibe, its licensors, or other providers of such material and are protected by
           United States and international copyright, trademark, patent, trade secret, and other intellectual property or
           proprietary rights laws.
         </p>
@@ -170,14 +170,14 @@ export function TermsOfServiceContent() {
             <AccordionContent>
               <p className="mb-2">
                 <strong>Your Content:</strong> You retain all rights to any content you create, upload, or share through
-                our Services ("User Content"). By uploading or sharing User Content, you grant Creavibe.pro a worldwide,
+                our Services ("User Content"). By uploading or sharing User Content, you grant CreaVibe a worldwide,
                 non-exclusive, royalty-free license to use, reproduce, modify, adapt, publish, translate, and distribute
                 your User Content in connection with providing and promoting our Services.
               </p>
               <p>
-                <strong>Our Content:</strong> All content provided by Creavibe.pro, including but not limited to text,
+                <strong>Our Content:</strong> All content provided by CreaVibe, including but not limited to text,
                 graphics, logos, icons, images, audio clips, digital downloads, data compilations, and software, is the
-                property of Creavibe.pro or its content suppliers and is protected by international copyright laws.
+                property of CreaVibe or its content suppliers and is protected by international copyright laws.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -189,7 +189,7 @@ export function TermsOfServiceContent() {
                 <li>
                   Modify, copy, distribute, transmit, display, perform, reproduce, publish, license, create derivative
                   works from, transfer, or sell any information, software, products, or services obtained from the
-                  Services without prior written permission from Creavibe.pro
+                  Services without prior written permission from CreaVibe
                 </li>
                 <li>
                   Use any automated means, including, without limitation, agents, robots, scripts, or spiders, to
@@ -216,13 +216,13 @@ export function TermsOfServiceContent() {
           <CardContent>
             <p className="font-medium">
               THE SERVICES ARE PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS, WITHOUT ANY WARRANTIES OF ANY KIND,
-              EITHER EXPRESS OR IMPLIED. CREAVIBE.PRO DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT
+              EITHER EXPRESS OR IMPLIED. CreaVibe DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, WITHOUT
               LIMITATION, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
             </p>
           </CardContent>
         </Card>
         <p>
-          Creavibe.pro does not warrant that the Services will be uninterrupted or error-free, that defects will be
+          CreaVibe does not warrant that the Services will be uninterrupted or error-free, that defects will be
           corrected, or that the Services or the server that makes them available are free of viruses or other harmful
           components.
         </p>
@@ -232,7 +232,7 @@ export function TermsOfServiceContent() {
           </CardHeader>
           <CardContent>
             <p className="font-medium">
-              IN NO EVENT WILL CREAVIBE.PRO, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS,
+              IN NO EVENT WILL CreaVibe, ITS AFFILIATES, OR THEIR LICENSORS, SERVICE PROVIDERS, EMPLOYEES, AGENTS,
               OFFICERS, OR DIRECTORS BE LIABLE FOR DAMAGES OF ANY KIND, UNDER ANY LEGAL THEORY, ARISING OUT OF OR IN
               CONNECTION WITH YOUR USE, OR INABILITY TO USE, THE SERVICES, INCLUDING ANY DIRECT, INDIRECT, SPECIAL,
               INCIDENTAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.
@@ -240,8 +240,8 @@ export function TermsOfServiceContent() {
           </CardContent>
         </Card>
         <p>
-          Creavibe.pro is not responsible for the content, accuracy, or opinions expressed in any user-generated content
-          on our Services. Such content does not necessarily reflect the opinions or policies of Creavibe.pro.
+          CreaVibe is not responsible for the content, accuracy, or opinions expressed in any user-generated content
+          on our Services. Such content does not necessarily reflect the opinions or policies of CreaVibe.
         </p>
       </section>
 
@@ -254,17 +254,17 @@ export function TermsOfServiceContent() {
         </p>
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="termination-by-creavibe">
-            <AccordionTrigger>Termination by Creavibe.pro</AccordionTrigger>
+            <AccordionTrigger>Termination by CreaVibe</AccordionTrigger>
             <AccordionContent>
               <p>
-                Creavibe.pro may terminate your access to all or any part of the Services at any time, with or without
+                CreaVibe may terminate your access to all or any part of the Services at any time, with or without
                 cause, with or without notice, effective immediately. Reasons for termination may include, but are not
                 limited to:
               </p>
               <ul className="list-disc pl-6 space-y-2 mt-2">
                 <li>Violation of these Terms</li>
                 <li>Engaging in fraudulent or illegal activities</li>
-                <li>Creating risk or possible legal exposure for Creavibe.pro</li>
+                <li>Creating risk or possible legal exposure for CreaVibe</li>
                 <li>Extended periods of inactivity</li>
                 <li>Non-payment of any fees owed</li>
               </ul>
@@ -275,7 +275,7 @@ export function TermsOfServiceContent() {
             <AccordionContent>
               <p>You may delete your account at any time by following these steps:</p>
               <ol className="list-decimal pl-6 space-y-2 mt-2">
-                <li>Log in to your Creavibe.pro account</li>
+                <li>Log in to your CreaVibe account</li>
                 <li>Navigate to Account Settings</li>
                 <li>Select the "Delete Account" option</li>
                 <li>Follow the confirmation process</li>
@@ -337,8 +337,8 @@ export function TermsOfServiceContent() {
             <p>Middletown, DE 19709, USA</p>
             <p className="mt-4">
               Email:{" "}
-              <a href="mailto:hello@creavibe.pro" className="text-primary hover:underline">
-                hello@creavibe.pro
+              <a href="mailto:hello@CreaVibe" className="text-primary hover:underline">
+                hello@CreaVibe
               </a>
             </p>
           </CardContent>
@@ -353,7 +353,7 @@ export function TermsOfServiceContent() {
             <AccordionTrigger>Modifications to Terms</AccordionTrigger>
             <AccordionContent>
               <p>
-                Creavibe.pro reserves the right to modify these Terms at any time. We will provide notice of any
+                CreaVibe reserves the right to modify these Terms at any time. We will provide notice of any
                 material changes by posting the new Terms on our website and updating the "Last Updated" date. Your
                 continued use of the Services after any such changes constitutes your acceptance of the new Terms.
               </p>
@@ -372,9 +372,9 @@ export function TermsOfServiceContent() {
             <AccordionTrigger>Waiver</AccordionTrigger>
             <AccordionContent>
               <p>
-                The failure of Creavibe.pro to enforce any right or provision of these Terms will not be deemed a waiver
+                The failure of CreaVibe to enforce any right or provision of these Terms will not be deemed a waiver
                 of such right or provision. Any waiver of any provision of these Terms will be effective only if in
-                writing and signed by Creavibe.pro.
+                writing and signed by CreaVibe.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -382,8 +382,8 @@ export function TermsOfServiceContent() {
             <AccordionTrigger>Entire Agreement</AccordionTrigger>
             <AccordionContent>
               <p>
-                These Terms, together with the Privacy Policy and any other legal notices published by Creavibe.pro on
-                the Services, shall constitute the entire agreement between you and Creavibe.pro concerning the
+                These Terms, together with the Privacy Policy and any other legal notices published by CreaVibe on
+                the Services, shall constitute the entire agreement between you and CreaVibe concerning the
                 Services.
               </p>
             </AccordionContent>

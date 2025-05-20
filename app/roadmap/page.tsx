@@ -4,7 +4,7 @@ import RoadmapBoard from "@/components/roadmap/roadmap-board"
 import { getRoadmapItems } from "@/lib/roadmap-service"
 
 export const metadata: Metadata = {
-  title: "Product Roadmap | Creavibe.pro",
+  title: "Product Roadmap | CreaVibe",
   description:
     "Explore our product roadmap to see what features we're planning, working on, and have recently completed.",
 }

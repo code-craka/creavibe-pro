@@ -7,8 +7,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Suspense } from "react"
 
 export const metadata: Metadata = {
-  title: "Documentation | Creavibe.pro",
-  description: "Developer documentation for Creavibe.pro API and SDK",
+  title: "Documentation | CreaVibe",
+  description: "Developer documentation for CreaVibe API and SDK",
 }
 
 export default function DocsLayout({
@@ -23,7 +23,7 @@ export default function DocsLayout({
           <div className="container flex h-14 items-center">
             <div className="mr-4 hidden md:flex">
               <a href="/" className="mr-6 flex items-center space-x-2">
-                <span className="font-bold">Creavibe.pro</span>
+                <span className="font-bold">CreaVibe</span>
                 <span className="text-sm text-muted-foreground">Docs</span>
               </a>
             </div>
@@ -61,7 +61,7 @@ export default function DocsLayout({
         <footer className="border-t py-6 md:py-0">
           <div className="container flex flex-col items-center justify-between gap-4 md:h-14 md:flex-row">
             <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-              © {new Date().getFullYear()} Creavibe.pro. All rights reserved.
+              © {new Date().getFullYear()} CreaVibe. All rights reserved.
             </p>
           </div>
         </footer>

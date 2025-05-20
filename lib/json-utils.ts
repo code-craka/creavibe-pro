@@ -28,8 +28,8 @@ export function safeJsonParse<T>(text: string, fallback?: T): T | null {
  * @returns The JSON string or an empty string if stringification fails
  */
 export function safeJsonStringify(
-  data: any,
-  replacer?: (key: string, value: any) => any,
+  data: unknown,
+  replacer?: (key: string, value: unknown) => unknown | undefined,
   space?: string | number,
 ): string {
   try {
@@ -51,7 +51,7 @@ export function isValidJson(text: string): boolean {
   try {
     JSON.parse(text)
     return true
-  } catch (error) {
+  } catch {
     return false
   }
 }

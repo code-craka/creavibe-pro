@@ -57,7 +57,7 @@ const initialConfig = {
     author: "John Doe",
     language: "en",
     coverImage: "/placeholder.svg?key=ifw01",
-    description: "This is a sample web book created with the Creavibe.pro platform.",
+    description: "This is a sample web book created with the CreaVibe platform.",
   },
   layout: {
     theme: "light",

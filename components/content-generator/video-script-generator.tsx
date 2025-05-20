@@ -106,7 +106,7 @@ function generateMockVideoScript(topic: string, length: string) {
     
     <h3>CALL TO ACTION</h3>
     <p>[End Screen]</p>
-    <p><strong>HOST:</strong> "Check out our other videos and visit our website at creavibe.pro for more resources on ${topic}."</p>
+    <p><strong>HOST:</strong> "Check out our other videos and visit our website at CreaVibe for more resources on ${topic}."</p>
   `
 
   return script

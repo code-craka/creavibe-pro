@@ -1,11 +1,11 @@
 # Navbar Component
 
-The Navbar component is a responsive navigation bar for the Creavibe.pro SaaS application. It includes branding, navigation links, notification bell, and user avatar with dropdown menu.
+The Navbar component is a responsive navigation bar for the CreaVibe SaaS application. It includes branding, navigation links, notification bell, and user avatar with dropdown menu.
 
 ## Features
 
 - **Responsive Design**: Adapts to different screen sizes with a mobile-friendly hamburger menu
-- **Branding**: Displays the Creavibe.pro logo and name
+- **Branding**: Displays the CreaVibe logo and name
 - **Navigation Links**: Provides links to key dashboard sections
 - **Notification Bell**: Shows unread notification count and dropdown menu
 - **User Avatar**: Displays user profile picture with dropdown menu

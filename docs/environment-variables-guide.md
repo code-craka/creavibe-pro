@@ -1,6 +1,6 @@
-# Environment Variables Guide for Creavibe.pro
+# Environment Variables Guide for CreaVibe
 
-This guide explains how to set up and manage environment variables for the Creavibe.pro application in different environments.
+This guide explains how to set up and manage environment variables for the CreaVibe application in different environments.
 
 ## Required Environment Variables
 

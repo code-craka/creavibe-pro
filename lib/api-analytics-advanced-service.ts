@@ -5,6 +5,10 @@ import type {
   CompetitiveInsight,
   AnomalyDetectionData,
   AnomalySettings,
+  ApiUsageDataPoint,
+  ApiUsageForecast,
+  ApiUsageTimeframe,
+  ScenarioSimulation,
 } from "@/types/api-analytics-advanced"
 
 // Mock data for API token usage predictions
@@ -291,7 +295,7 @@ const mockAnomalyDetectionData: AnomalyDetectionData = {
 }
 
 // API functions
-async function getPredictiveAnalytics(tokenId: string, timeRange: string): Promise<ApiTokenPrediction[]> {
+async function getPredictiveAnalytics(): Promise<ApiTokenPrediction[]> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1000))
   return mockPredictiveData
@@ -324,7 +328,7 @@ async function getCompetitiveAnalytics(): Promise<{
   }
 }
 
-async function getAnomalyDetectionData(tokenId: string, timeRange: string): Promise<AnomalyDetectionData> {
+async function getAnomalyDetectionData(): Promise<AnomalyDetectionData> {
   // Simulate API call
   await new Promise((resolve) => setTimeout(resolve, 1200))
   return mockAnomalyDetectionData
@@ -337,6 +341,193 @@ async function updateAnomalySettings(settings: AnomalySettings): Promise<void> {
   console.log("Settings updated:", settings)
 }
 
+// Mock data for historical data
+const mockHistoricalData: ApiUsageDataPoint[] = Array.from({ length: 30 }, (_, i) => ({
+  date: new Date(Date.now() - (29 - i) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+  value: 1000 + Math.floor(Math.random() * 500),
+  type: 'historical'
+}));
+
+// Mock data for forecast data
+const mockForecastData: ApiUsageForecast = {
+  dataPoints: Array.from({ length: 14 }, (_, i) => ({
+    date: new Date(Date.now() + (i + 1) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    value: 1200 + Math.floor(Math.random() * 700),
+    type: 'forecast'
+  })),
+  accuracy: 0.85,
+  trend: 'increasing',
+  insights: [
+    'API usage is projected to increase by 15% over the next two weeks',
+    'Weekend usage patterns show 30% lower volume than weekdays',
+    'Consider scaling resources to accommodate growth'
+  ]
+};
+
+// Mock data for timeframes
+const mockTimeframes: ApiUsageTimeframe[] = [
+  { id: '7', label: '7 days', days: 7 },
+  { id: '14', label: '14 days', days: 14, default: true },
+  { id: '30', label: '30 days', days: 30 },
+  { id: '90', label: '90 days', days: 90 }
+];
+
+// Mock data for scenario simulations
+const mockScenarioSimulations: ScenarioSimulation[] = [
+  {
+    id: 'scenario-1',
+    name: 'New Marketing Campaign',
+    description: 'Simulate the impact of a new marketing campaign on API usage',
+    parameters: [
+      { name: 'Expected New Users', value: 5000, min: 1000, max: 10000, step: 100 },
+      { name: 'API Calls Per User', value: 10, min: 1, max: 50, step: 1 }
+    ],
+    results: [
+      { 
+        metric: 'Daily Requests', 
+        baseline: 50000, 
+        simulated: 100000, 
+        change: 100, 
+        impact: 'positive' 
+      },
+      { 
+        metric: 'Response Time', 
+        baseline: 150, 
+        simulated: 180, 
+        change: 20, 
+        impact: 'negative' 
+      }
+    ],
+    recommendations: [
+      'Consider scaling API infrastructure before campaign launch',
+      'Implement caching to reduce response time impact'
+    ],
+    createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
+  },
+  {
+    id: 'scenario-2',
+    name: 'Feature Deprecation',
+    description: 'Simulate the impact of deprecating the legacy search API',
+    parameters: [
+      { name: 'Current Usage %', value: 15, min: 0, max: 100, step: 1 },
+      { name: 'Migration Rate', value: 50, min: 0, max: 100, step: 5 }
+    ],
+    results: [
+      { 
+        metric: 'Daily Requests', 
+        baseline: 50000, 
+        simulated: 42500, 
+        change: -15, 
+        impact: 'negative' 
+      },
+      { 
+        metric: 'Error Rate', 
+        baseline: 2.5, 
+        simulated: 1.8, 
+        change: -28, 
+        impact: 'positive' 
+      }
+    ],
+    recommendations: [
+      'Provide clear migration documentation',
+      'Implement gradual deprecation with warnings'
+    ],
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString()
+  }
+];
+
+// Additional API functions
+async function getHistoricalData(days: number = 30): Promise<ApiUsageDataPoint[]> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  return mockHistoricalData.slice(-days);
+}
+
+async function getForecastData(days: number = 14): Promise<ApiUsageForecast> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+  // Adjust the forecast data based on the requested days
+  const adjustedForecast = {
+    ...mockForecastData,
+    dataPoints: Array.from({ length: days }, (_, i) => ({
+      date: new Date(Date.now() + (i + 1) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      value: 1200 + Math.floor(Math.random() * 700),
+      type: 'forecast' as const
+    }))
+  };
+  
+  return adjustedForecast;
+}
+
+async function getAvailableTimeframes(): Promise<ApiUsageTimeframe[]> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  return mockTimeframes;
+}
+
+async function getScenarioSimulations(): Promise<ScenarioSimulation[]> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  return mockScenarioSimulations;
+}
+
+async function createScenarioSimulation(scenario: {
+  name: string;
+  description: string;
+  baselineUsage?: number;
+  simulatedUsage?: number;
+  percentageChange?: number;
+  impactAssessment?: string;
+}): Promise<ScenarioSimulation> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+  // Create a new scenario simulation with the provided data
+  const newScenario: ScenarioSimulation = {
+    id: `scenario-${Date.now()}`,
+    name: scenario.name,
+    description: scenario.description,
+    parameters: [
+      { name: 'Baseline Usage', value: scenario.baselineUsage || 5000, min: 1000, max: 10000, step: 100 }
+    ],
+    results: [
+      {
+        metric: 'API Requests',
+        baseline: scenario.baselineUsage || 5000,
+        simulated: scenario.simulatedUsage || 6000,
+        change: scenario.percentageChange || 20,
+        impact: (scenario.percentageChange || 20) > 0 ? 'positive' : 'negative'
+      }
+    ],
+    recommendations: [
+      scenario.impactAssessment || 'Consider the impact on your API infrastructure.'
+    ],
+    createdAt: new Date().toISOString()
+  };
+  
+  // Add to mock data (for persistence during the session)
+  mockScenarioSimulations.push(newScenario);
+  
+  return newScenario;
+}
+
+async function deleteScenarioSimulation(scenarioId: string): Promise<boolean> {
+  // Simulate API call
+  await new Promise((resolve) => setTimeout(resolve, 600));
+  
+  // Find the index of the scenario to delete
+  const index = mockScenarioSimulations.findIndex(scenario => scenario.id === scenarioId);
+  
+  if (index !== -1) {
+    // Remove the scenario from the mock data
+    mockScenarioSimulations.splice(index, 1);
+    return true;
+  }
+  
+  return false;
+}
+
 // Create and export the service object
 export const apiAnalyticsAdvancedService = {
   getPredictiveAnalytics,
@@ -345,6 +536,12 @@ export const apiAnalyticsAdvancedService = {
   getCompetitiveAnalytics,
   getAnomalyDetectionData,
   updateAnomalySettings,
+  getHistoricalData,
+  getForecastData,
+  getAvailableTimeframes,
+  getScenarioSimulations,
+  createScenarioSimulation,
+  deleteScenarioSimulation
 }
 
 // Also export individual functions for backward compatibility
@@ -355,4 +552,10 @@ export {
   getCompetitiveAnalytics,
   getAnomalyDetectionData,
   updateAnomalySettings,
+  getHistoricalData,
+  getForecastData,
+  getAvailableTimeframes,
+  getScenarioSimulations,
+  createScenarioSimulation,
+  deleteScenarioSimulation
 }

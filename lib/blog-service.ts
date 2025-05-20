@@ -10,10 +10,12 @@ const blogPosts: BlogPost[] = [
     content: "Full article content here...",
     coverImage: "/blog/ai-content-creation.png",
     publishedAt: "2023-10-15T10:00:00Z",
+    updatedAt: "2023-11-01T14:30:00Z",
     author: {
       id: "1",
       name: "Alex Morgan",
       avatar: "/authors/alex-morgan.png",
+      role: "AI Research Lead"
     },
     tags: ["AI", "Content Creation", "Productivity"],
     category: "AI",
@@ -26,10 +28,12 @@ const blogPosts: BlogPost[] = [
     content: "Full article content here...",
     coverImage: "/blog/collaboration-tools.png",
     publishedAt: "2023-09-28T14:30:00Z",
+    updatedAt: "2023-10-15T09:45:00Z",
     author: {
       id: "2",
       name: "Jamie Chen",
       avatar: "/authors/jamie-chen.png",
+      role: "Product Manager"
     },
     tags: ["Collaboration", "Remote Work", "Tools"],
     category: "Collaboration",
@@ -42,10 +46,12 @@ const blogPosts: BlogPost[] = [
     content: "Full article content here...",
     coverImage: "/blog/future-ai-trends.png",
     publishedAt: "2023-09-10T09:15:00Z",
+    updatedAt: "2023-09-25T11:20:00Z",
     author: {
       id: "3",
       name: "Taylor Wilson",
       avatar: "/authors/taylor-wilson.png",
+      role: "Content Strategist"
     },
     tags: ["AI", "Content Marketing", "Trends"],
     category: "Marketing",

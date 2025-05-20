@@ -2,7 +2,11 @@ import type React from "react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/contexts/auth-context"
+import { AuthSuccessBanner } from "@/components/auth/auth-success-banner"
 import "./globals.css"
+import { Inter } from "next/font/google"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export default function RootLayout({
   children,
@@ -14,6 +18,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="light">
           <AuthProvider>
+            <AuthSuccessBanner />
             {children}
             <Toaster />
           </AuthProvider>
@@ -24,5 +29,10 @@ export default function RootLayout({
 }
 
 export const metadata = {
-      generator: 'v0.dev'
-    };
+  title: 'CreaVibe - AI-Powered Content Creation',
+  description: 'Create, collaborate, and publish content with AI assistance',
+  generator: 'Next.js',
+  icons: {
+    icon: '/favicon.png',
+  },
+};

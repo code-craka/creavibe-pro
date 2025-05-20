@@ -49,7 +49,7 @@ const openRoles = [
     department: "Operations",
     location: "Berlin, Germany",
     remote: false,
-    description: "Help our customers get the most out of Creavibe.pro and achieve their content goals.",
+    description: "Help our customers get the most out of CreaVibe and achieve their content goals.",
   },
 ]
 

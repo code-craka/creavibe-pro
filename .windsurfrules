@@ -1,0 +1,108 @@
+# .windsurfrules for CreaVibe
+
+---
+
+## 📋 Project-Specific Windsurf Rules
+
+---
+
+### 1. Authentication & Security
+
+- Use Supabase for all authentication (magic link, password, social).
+- All login/signup/reset flows **must provide user feedback** (toast or modal).
+- After auth success, **redirect to `/dashboard`**—never leave user on `/login`.
+- Never expose Supabase service key or JWT secrets in client-side code.
+- All auth mutations go through `lib/supabase.ts`.
+- Update RLS policies for any new user-related tables by default.
+- Do not allow fallback to insecure auth flows.
+
+---
+
+### 2. API Design & Contract
+
+- All endpoints **must require** either an API key or Supabase JWT auth.
+- API request/response shape must follow **OpenAPI 3 spec**. Always document changes.
+- Return JSON error bodies using the `{ error: { code, message, details } }` shape.
+- Never return stack traces to client. Log server-side only.
+- All mutation endpoints must be **idempotent** if possible.
+- **Rate limiting** must be enforced (`api-tokens` table for config).
+
+---
+
+### 3. Billing, Stripe, and Payments
+
+- Use **Stripe Checkout/Portal**—never custom card input forms.
+- All webhook events must be processed in `/app/api/webhook/route.ts`.
+- Store all Stripe IDs (customer, subscription, invoice) in your own DB.
+- Sync local `public.subscriptions` table with Stripe events.
+- Webhooks must be **idempotent** and verify Stripe signatures.
+- Never expose Stripe secret keys to the client.
+- On any payment/billing model change, update workflow and API docs.
+
+---
+
+### 4. Supabase/DB Policy
+
+- Every new table must have **Row Level Security (RLS)** enabled at creation.
+- All RLS policies must be documented in `schema.sql` and `.windsurfrules`.
+- Use Postgres **triggers** for audit, `updated_at`, and referential integrity.
+- No direct client SQL—**always** go through Supabase client.
+- Index all foreign keys and `user_id` fields.
+- Never grant public access to mutation or select on tables with user data.
+
+---
+
+### 5. UI & Accessibility
+
+- Use **Tailwind CSS** and **shadcn/ui** components only; no third-party UI kits.
+- Every interactive element (buttons, links, forms) must be keyboard accessible.
+- Use **ARIA labels** for all custom UI components.
+- Maintain consistent **light/dark mode** support—check theme context in every new UI.
+- Use `toast` for success/error messaging.
+- Test main flows with **Playwright** before merging UI changes.
+
+---
+
+### 6. Testing & QA
+
+- All public-facing logic must be tested with **Playwright** or **Jest**.
+- Auth flows must have integration tests in `test/auth/`.
+- Data logic must have unit tests with mocked Supabase.
+- New endpoints require at least 1 test for happy and unhappy path.
+- All test files go under `/tests` or as close as possible to the code under test.
+
+---
+
+### Additional Code Quality & Structure Rules
+
+#### Naming Conventions
+- Use PascalCase for all React component files and exported components (e.g., UserCard.tsx).
+- Use camelCase for variables, functions, and methods.
+- Use kebab-case for directories and regular non-component files (e.g., utils/data-fetcher.ts).
+- Use UPPERCASE for environment variables and defined constants.
+
+#### Code Style & Formatting
+- Enforce Airbnb Style Guide via ESLint and Prettier configurations.
+- Prefer named exports for components and utilities.
+- Use descriptive variable names (e.g., isLoading, hasError).
+- Avoid using `any` and `enum` types; prefer interfaces, union types, and explicit type maps.
+- Enable TypeScript strict mode for all codebases.
+- Use functional and declarative programming; avoid classes in React code.
+- Prefer iteration and utility functions (map/filter/reduce) over duplication and deep nesting.
+- Prefer early returns and utility extraction to avoid deeply nested code.
+- Keep functions short and single-purpose (<20 lines when practical).
+
+#### Data & Logic
+- Prefer immutability for data and state (use `readonly` and `as const` where applicable).
+- Use custom types or interfaces for composite data structures; avoid loose objects/arrays.
+- Define constants for magic numbers or strings used more than once.
+
+# Branding Consistency Rule
+- The app must display “CreaVibe” everywhere; never use the old “CreaVibe” or “creavibe-pro” name.
+- Use the provided brand assets for all logos and favicons in public/ and meta tags.
+
+#### Best Practices
+- Use React Context for app-wide state management where necessary.
+- Use React Hook Form for form state and Zod for schema validation.
+- Ensure all code and documentation are in English.
+- Use Prettier for automatic code formatting (automate with pre-commit hook).

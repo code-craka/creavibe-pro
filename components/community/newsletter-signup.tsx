@@ -73,7 +73,7 @@ export default function NewsletterSignup() {
         <div className="flex items-center space-x-2">
           <Checkbox id="consent" checked={consent} onCheckedChange={(checked) => setConsent(checked as boolean)} />
           <Label htmlFor="consent" className="text-sm text-muted-foreground">
-            I agree to receive marketing communications from Creavibe.pro
+            I agree to receive marketing communications from CreaVibe
           </Label>
         </div>
       </form>

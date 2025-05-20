@@ -9,7 +9,7 @@ export default function CommunityHero() {
       </div>
       <h1 className="text-4xl font-bold tracking-tight mb-4">Join Our Community</h1>
       <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-        Connect with other Creavibe.pro users, share ideas, get help, and contribute to making our platform even better.
+        Connect with other CreaVibe users, share ideas, get help, and contribute to making our platform even better.
       </p>
       <div className="flex flex-wrap justify-center gap-4">
         <Button size="lg">Join Discord</Button>

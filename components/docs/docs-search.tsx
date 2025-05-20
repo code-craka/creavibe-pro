@@ -41,17 +41,17 @@ export function DocsSearch() {
         {
           title: "Getting Started",
           href: "/docs/getting-started",
-          content: "Learn how to get started with Creavibe.pro API and SDK.",
+          content: "Learn how to get started with CreaVibe API and SDK.",
         },
         {
           title: "Authentication",
           href: "/docs/authentication",
-          content: "Learn how to authenticate with the Creavibe.pro API.",
+          content: "Learn how to authenticate with the CreaVibe API.",
         },
         {
           title: "API Keys",
           href: "/docs/authentication/api-keys",
-          content: "Generate and manage API keys for your Creavibe.pro account.",
+          content: "Generate and manage API keys for your CreaVibe account.",
         },
       ].filter(
         (result) =>

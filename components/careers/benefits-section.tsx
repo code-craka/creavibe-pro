@@ -26,7 +26,7 @@ const benefitCategories = [
   },
   {
     title: "Perks",
-    benefits: ["Equity compensation", "Home office stipend", "Team retreats", "Free Creavibe.pro subscription"],
+    benefits: ["Equity compensation", "Home office stipend", "Team retreats", "Free CreaVibe subscription"],
   },
 ]
 

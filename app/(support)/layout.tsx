@@ -24,7 +24,7 @@ export default function SupportLayout({
               <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
                 <span className="text-primary-foreground font-bold">C</span>
               </div>
-              <span className="font-bold text-xl">Creavibe.pro</span>
+              <span className="font-bold text-xl">CreaVibe</span>
             </Link>
           </div>
           <nav className="hidden md:flex items-center gap-6">
@@ -82,7 +82,7 @@ export default function SupportLayout({
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <h3 className="font-bold text-lg mb-4">Creavibe.pro</h3>
+              <h3 className="font-bold text-lg mb-4">CreaVibe</h3>
               <p className="text-sm text-muted-foreground mb-4">
                 AI-powered content creation and real-time collaboration platform for marketing teams and creators.
               </p>
@@ -180,7 +180,7 @@ export default function SupportLayout({
           </div>
           <div className="border-t mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Creavibe.pro. All rights reserved.
+              © {new Date().getFullYear()} CreaVibe. All rights reserved.
             </p>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
               <Link href="#" className="text-muted-foreground hover:text-foreground">

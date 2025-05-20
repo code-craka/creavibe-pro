@@ -55,7 +55,7 @@ const integrations: Integration[] = [
   {
     id: "zapier",
     name: "Zapier",
-    description: "Connect Creavibe.pro with thousands of apps through Zapier automations.",
+    description: "Connect CreaVibe with thousands of apps through Zapier automations.",
     iconUrl: "/integrations/zapier.png",
     categories: ["Automation", "Productivity"],
     isConnected: false,

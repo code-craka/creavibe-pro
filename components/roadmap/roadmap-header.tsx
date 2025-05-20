@@ -25,7 +25,7 @@ export default function RoadmapHeader() {
           <h1 className="text-3xl font-bold tracking-tight">Product Roadmap</h1>
           <p className="text-muted-foreground mt-2 max-w-2xl">
             Explore our product roadmap to see what features we're planning, working on, and have recently completed.
-            We're constantly improving Creavibe.pro based on your feedback.
+            We're constantly improving CreaVibe based on your feedback.
           </p>
         </div>
         {isAdmin && (

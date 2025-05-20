@@ -1,13 +1,9 @@
-import path from "path"
-
 export interface Doc {
   slug: string
   title: string
   description: string
   content: string
 }
-
-const docsDirectory = path.join(process.cwd(), "content")
 
 export async function getAllDocs(): Promise<Doc[]> {
   // In a real implementation, this would read from the file system
@@ -16,25 +12,25 @@ export async function getAllDocs(): Promise<Doc[]> {
     {
       slug: "getting-started",
       title: "Getting Started",
-      description: "Learn how to get started with Creavibe.pro API and SDK",
+      description: "Learn how to get started with CreaVibe API and SDK",
       content: "",
     },
     {
       slug: "authentication",
       title: "Authentication",
-      description: "Learn how to authenticate with the Creavibe.pro API",
+      description: "Learn how to authenticate with the CreaVibe API",
       content: "",
     },
     {
       slug: "api-reference",
       title: "API Reference",
-      description: "Explore the Creavibe.pro API endpoints and parameters",
+      description: "Explore the CreaVibe API endpoints and parameters",
       content: "",
     },
     {
       slug: "configuration",
       title: "Configuration",
-      description: "Configure your Creavibe.pro integration",
+      description: "Configure your CreaVibe integration",
       content: "",
     },
     {
@@ -60,22 +56,22 @@ export async function getDocBySlug(slug: string): Promise<Doc> {
   if (slug === "getting-started") {
     return {
       slug,
-      title: "Getting Started with Creavibe.pro",
-      description: "Learn how to get started with Creavibe.pro API and SDK",
+      title: "Getting Started with CreaVibe",
+      description: "Learn how to get started with CreaVibe API and SDK",
       content: `
-# Getting Started with Creavibe.pro
+# Getting Started with CreaVibe
 
-Welcome to the Creavibe.pro developer documentation! This guide will help you get started with our API and SDK.
+Welcome to the CreaVibe developer documentation! This guide will help you get started with our API and SDK.
 
 ## Overview
 
-Creavibe.pro is a modern SaaS platform for AI-powered content creation and real-time creative collaboration. Our API allows you to integrate Creavibe.pro's powerful features into your own applications.
+CreaVibe is a modern SaaS platform for AI-powered content creation and real-time creative collaboration. Our API allows you to integrate CreaVibe's powerful features into your own applications.
 
 ## Prerequisites
 
 Before you begin, you'll need:
 
-- A Creavibe.pro account
+- A CreaVibe account
 - API credentials (API key or OAuth client ID and secret)
 - Basic knowledge of REST APIs
 
@@ -101,7 +97,7 @@ pnpm add @creavibe/sdk
 
 ## Quick Start
 
-Here's a simple example of how to use the Creavibe.pro SDK:
+Here's a simple example of how to use the CreaVibe SDK:
 
 \`\`\`typescript
 import { Creavibe } from '@creavibe/sdk';
@@ -114,7 +110,7 @@ const creavibe = new Creavibe({
 // Create a new project
 async function createProject() {
   try {
-    const project = await creavibe.projects.create({
+    const project = await CreaVibejects.create({
       name: 'My First Project',
       description: 'A project created via the API',
     });
@@ -139,7 +135,7 @@ createProject();
 If you need help, you can:
 
 - [Join our Discord community](https://discord.gg/creavibe)
-- [Contact our support team](mailto:support@creavibe.pro)
+- [Contact our support team](mailto:support@creavibe.app)
 - [Open an issue on GitHub](https://github.com/creavibe/sdk/issues)
       `,
     }
@@ -150,19 +146,19 @@ If you need help, you can:
     return {
       slug,
       title: "Authentication",
-      description: "Learn how to authenticate with the Creavibe.pro API",
+      description: "Learn how to authenticate with the CreaVibe API",
       content: `
 # Authentication
 
-Creavibe.pro offers multiple authentication methods to secure your API requests.
+CreaVibe offers multiple authentication methods to secure your API requests.
 
 ## API Keys
 
-API keys are the simplest way to authenticate with the Creavibe.pro API. Each API key is associated with a specific user account and has specific permissions.
+API keys are the simplest way to authenticate with the CreaVibe API. Each API key is associated with a specific user account and has specific permissions.
 
 ### Generating an API Key
 
-1. Log in to your Creavibe.pro account
+1. Log in to your CreaVibe account
 2. Navigate to Settings > API Keys
 3. Click "Generate New API Key"
 4. Give your key a name and select the appropriate permissions
@@ -176,7 +172,7 @@ Include your API key in the Authorization header of your requests:
 
 \`\`\`javascript
 // Using fetch
-fetch('https://api.creavibe.pro/v1/projects', {
+fetch('https://api.CreaVibe/v1/projects', {
   headers: {
     'Authorization': 'Bearer YOUR_API_KEY',
     'Content-Type': 'application/json'
@@ -192,17 +188,17 @@ const creavibe = new Creavibe({
   apiKey: 'YOUR_API_KEY',
 });
 
-creavibe.projects.list()
+CreaVibejects.list()
   .then(projects => console.log(projects));
 \`\`\`
 
 ## OAuth 2.0
 
-For applications that need to access Creavibe.pro on behalf of users, we recommend using OAuth 2.0.
+For applications that need to access CreaVibe on behalf of users, we recommend using OAuth 2.0.
 
 ### Setting Up OAuth
 
-1. Register your application in the Creavibe.pro Developer Portal
+1. Register your application in the CreaVibe Developer Portal
 2. Configure your redirect URIs
 3. Note your client ID and client secret
 
@@ -210,7 +206,7 @@ For applications that need to access Creavibe.pro on behalf of users, we recomme
 
 \`\`\`javascript
 // Step 1: Redirect the user to the authorization URL
-const authUrl = 'https://creavibe.pro/oauth/authorize?' +
+const authUrl = 'https://app.creavibe.app/oauth/authorize?' +
   'client_id=YOUR_CLIENT_ID&' +
   'redirect_uri=YOUR_REDIRECT_URI&' +
   'response_type=code&' +
@@ -218,7 +214,7 @@ const authUrl = 'https://creavibe.pro/oauth/authorize?' +
 
 // Step 2: Exchange the authorization code for an access token
 async function getAccessToken(code) {
-  const response = await fetch('https://api.creavibe.pro/oauth/token', {
+  const response = await fetch('https://api.creavibe.app/oauth/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -255,7 +251,7 @@ const token = jwt.sign(
 );
 
 // Use the JWT in your API requests
-fetch('https://api.creavibe.pro/v1/projects', {
+fetch('https://api.CreaVibe/v1/projects', {
   headers: {
     'Authorization': \`Bearer \${token}\`,
     'Content-Type': 'application/json'
@@ -306,7 +302,7 @@ const creavibe = new Creavibe({
 // Example function
 async function exampleFunction() {
   try {
-    const result = await creavibe.someMethod();
+    const result = await creaVibe.someMethod();
     console.log('Result:', result);
   } catch (error) {
     console.error('Error:', error);

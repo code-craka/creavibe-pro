@@ -6,9 +6,9 @@ import FeatureRequests from "@/components/community/feature-requests"
 import NewsletterSignup from "@/components/community/newsletter-signup"
 
 export const metadata: Metadata = {
-  title: "Community Hub | Creavibe.pro",
+  title: "Community Hub | CreaVibe",
   description:
-    "Join the Creavibe.pro community to connect with other creators, attend webinars, and contribute to feature requests.",
+    "Join the CreaVibe community to connect with other creators, attend webinars, and contribute to feature requests.",
 }
 
 export default function CommunityPage() {

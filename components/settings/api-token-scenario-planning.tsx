@@ -285,11 +285,11 @@ export function ApiTokenScenarioPlanning() {
                       </div>
                     </TableCell>
                     <TableCell className="hidden md:table-cell">{formatDate(scenario.createdAt)}</TableCell>
-                    <TableCell className="text-right">{scenario.baselineUsage.toLocaleString()}</TableCell>
-                    <TableCell className="text-right">{scenario.simulatedUsage.toLocaleString()}</TableCell>
-                    <TableCell className={`text-right ${getImpactColor(scenario.percentageChange)}`}>
-                      {scenario.percentageChange > 0 ? "+" : ""}
-                      {scenario.percentageChange}%
+                    <TableCell className="text-right">{scenario.results[0]?.baseline.toLocaleString() || 'N/A'}</TableCell>
+                    <TableCell className="text-right">{scenario.results[0]?.simulated.toLocaleString() || 'N/A'}</TableCell>
+                    <TableCell className={`text-right ${getImpactColor(scenario.results[0]?.change || 0)}`}>
+                      {scenario.results[0]?.change > 0 ? "+" : ""}
+                      {scenario.results[0]?.change || 0}%
                     </TableCell>
                     <TableCell className="text-right">
                       <Button
