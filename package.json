@@ -77,7 +77,7 @@
     "tailwindcss-animate": "^1.0.7",
     "uuid": "latest",
     "vaul": "^1.1.2",
-    "zod": "latest"
+    "zod": "^3.22.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.52.0",
